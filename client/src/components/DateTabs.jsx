@@ -57,6 +57,7 @@ export default function DateTabs() {
     >
       <CustomTabs
         value={value}
+        onChange={handleChange}
         variant="scrollable"
         TabIndicatorProps={{
           style: {
