@@ -7,26 +7,26 @@ import {
   CardActions,
   Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [OTP, setOTP] = useState("");
   const [OTPState, setOTPState] = useState(false);
   const [email, setEmail] = useState("");
+  const nav = new useNavigate();
   const handleOtp = (e) => {
-      e.preventDefault();
-      if(email==="") alert("Email empty")
-      else
-      setOTPState(!OTPState);
-    };
-    const handleBack = (e) => {
-        e.preventDefault();
-        setOTPState(!OTPState);
-    };
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      setOTPState(!OTPState);
-
-    };
+    e.preventDefault();
+    if (email === "") alert("Email empty");
+    else setOTPState(!OTPState);
+  };
+  const handleBack = (e) => {
+    e.preventDefault();
+    setOTPState(!OTPState);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    nav("/dashboard", { state: email });
+  };
   return (
     <div className="flex h-screen w-screen justify-center items-center bg-[#e5e5e5]">
       <Card className="h-1/2 w-full mx-8 sm:w-1/2 xl:w-1/3 flex flex-col justify-center items-center">
@@ -38,7 +38,10 @@ const Login = () => {
               label="OTP"
               variant="outlined"
               required
-              onChange={(e)=>{setOTP(e.target.value)}}
+              value={OTP}
+              onChange={(e) => {
+                setOTP(e.target.value);
+              }}
             />
           ) : (
             <TextField
@@ -46,7 +49,10 @@ const Login = () => {
               label="Email id"
               variant="outlined"
               required
-              onChange={(e)=>{setEmail(e.target.value)}}
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           )}
         </CardContent>
