@@ -8,34 +8,49 @@ import {
   FormLabel,
   RadioGroup,
   Typography,
+  Tabs,
+  Tab,
+  Box
 } from "@mui/material";
 import doctorMaleImage from "../assets/doctor_Male.svg";
 import doctorFemaleImage from "../assets/doctor_Female.svg";
 import audio from "../assets/Audio_b.png";
 import clinic from "../assets/In-Clinic.png";
 import video from "../assets/video_b.png";
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import DateTabs from "./DateTabs";
+
 
 const BookingBody = ({ name, specialization, gender, fees }) => {
   const imagePath = gender === "Male" ? doctorMaleImage : doctorFemaleImage;
-const [isClinic, setIsClinic] = useState(true)
+  const [isClinic, setIsClinic] = useState(true);
   const clinics = [
     "kldjfalk;sdjfsjkakfjaslkdjfkas",
     "dsfasdfasdfasdf",
     "asdfasdfasdfasd",
   ];
 
-  const handleInClinic=(e)=>{
-    e.preventDefault()
-    setIsClinic(true)
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+    };
   }
-  const handleAudio=(e)=>{
-    e.preventDefault()
-    setIsClinic(false)
-  }
-  const handleVideo=(e)=>{
-    e.preventDefault()
-    setIsClinic(false)
-  }
+
+  const handleInClinic = (e) => {
+    e.preventDefault();
+    setIsClinic(true);
+  };
+  const handleAudio = (e) => {
+    e.preventDefault();
+    setIsClinic(false);
+  };
+  const handleVideo = (e) => {
+    e.preventDefault();
+    setIsClinic(false);
+  };
   return (
     <div className="bg-white w-screen lg:w-3/4">
       {/* intro */}
@@ -82,17 +97,24 @@ const [isClinic, setIsClinic] = useState(true)
           </div>
         </div>
         <div className="flex gap-8">
-          <div className="flex flex-col justify-center items-center relative cursor-pointer"
-          onClick={handleInClinic}>
+          <div
+            className="flex flex-col justify-center items-center relative cursor-pointer"
+            onClick={handleInClinic}
+          >
             <img src={clinic} className="" height={85} width={85} />
-            <span className="absolute bottom-1 text-white" >In-Clinic</span>
+            <span className="absolute bottom-1 text-white">In-Clinic</span>
           </div>
-          <div className="flex flex-col justify-center items-center relative cursor-pointer"
-          onClick={handleAudio}>
+          <div
+            className="flex flex-col justify-center items-center relative cursor-pointer"
+            onClick={handleAudio}
+          >
             <img src={audio} className="" height={85} width={85} />
             <span className="absolute bottom-1">Audio</span>
           </div>
-          <div className="flex flex-col justify-center items-center relative cursor-pointer"onClick={handleVideo}>
+          <div
+            className="flex flex-col justify-center items-center relative cursor-pointer"
+            onClick={handleVideo}
+          >
             <img src={video} className="" height={85} width={85} />
             <span className="absolute bottom-1">Video</span>
           </div>
@@ -100,8 +122,12 @@ const [isClinic, setIsClinic] = useState(true)
       </div>
 
       {/* clinic */}
-      <div className={`mx-16 lg:mx-6 pt-10 ${isClinic===true?"block":"hidden"}`}>
-        <FormControl sx={{  }} variant="standard">
+      <div
+        className={`mx-16 lg:mx-6 pt-10 ${
+          isClinic === true ? "block" : "hidden"
+        }`}
+      >
+        <FormControl sx={{}} variant="standard">
           <Typography
             sx={{ fontWeight: "bold", color: "black", fontFamily: "Poppins" }}
           >
@@ -125,6 +151,7 @@ const [isClinic, setIsClinic] = useState(true)
       </div>
 
       {/* time slots */}
+      <DateTabs />
     </div>
   );
 };
