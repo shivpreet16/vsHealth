@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import Login from './Pages/Login'
 import Dashboard from './Pages/Dashboard'
 import DoctorDetails from './Pages/DoctorDetails';
+import DoctorProfile from './Pages/DoctorProfile';
 
 export default function App() {
   const doctors = [
@@ -16,7 +17,8 @@ export default function App() {
       specialization: 'Pediatrician',
       education: [ 'MBBS', 'MS' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
       name: 'Dr. Hernandez',
@@ -26,7 +28,8 @@ export default function App() {
       specialization: 'OB-GYN',
       education: [ 'MD', 'Specialization' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
       name: 'Dr. Thomas',
@@ -36,7 +39,8 @@ export default function App() {
       specialization: 'Oncologist',
       education: [ 'MBBS', 'MS' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
       name: 'Dr. Miller',
@@ -50,7 +54,8 @@ export default function App() {
       specialization: 'Neurologist',
       education: [ 'MBBS', 'MD' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
       name: 'Dr. Garcia',
@@ -60,9 +65,10 @@ export default function App() {
         'What are the treatment options?': 'Treatment options involve...'
       },
       specialization: 'Oncologist',
-      education: [ 'MD', 'Specialization' ],
+      education: [ 'MBBS', 'MD', 'Surgery' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
       name: 'Dr. Thomas',
@@ -73,10 +79,12 @@ export default function App() {
       },
       specialization: 'Neurologist',
       education: [ 'MBBS', 'MS' ],
-      biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.'
+      biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
+      fees: 1000,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
-      name: 'Dr. Thomas',
+      name: 'Dr. wohoo Thomas',
       experience: 38,
       gender: 'Female',
       FAQs: {
@@ -85,10 +93,11 @@ export default function App() {
       specialization: 'Orthopedic Surgeon',
       education: [ 'MBBS', 'MS' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
-      name: 'Dr. Garcia',
+      name: 'Dr. who Garcia',
       experience: 27,
       gender: 'Female',
       FAQs: {
@@ -98,10 +107,11 @@ export default function App() {
       specialization: 'Oncologist',
       education: [ 'MBBS', 'Specialization' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
-      name: 'Dr. Thomas',
+      name: 'Dr. maybe Thomas',
       experience: 26,
       gender: 'Female',
       FAQs: {
@@ -111,7 +121,8 @@ export default function App() {
       specialization: 'Dermatologist',
       education: [ 'MBBS', 'MD' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
       name: 'Dr. Maybe Johnson',
@@ -124,7 +135,8 @@ export default function App() {
       specialization: 'Gastroenterologist',
       education: [ 'MBBS', 'Specialization' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
       name: 'Dr. Johnson',
@@ -136,7 +148,8 @@ export default function App() {
       specialization: 'Endocrinologist',
       education: [ 'MBBS', 'MS' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
       name: 'Dr. Williams',
@@ -157,7 +170,8 @@ export default function App() {
       specialization: 'Dermatologist',
       education: [ 'DO', 'MD' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
       name: 'Dr. Hafiz Martinez',
@@ -170,7 +184,8 @@ export default function App() {
       specialization: 'Orthopedic Surgeon',
       education: [ 'MBBS', 'MD' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     },
     {
       name: 'Dr. Not Johnson',
@@ -182,7 +197,8 @@ export default function App() {
       specialization: 'Cardiologist',
       education: [ 'MBBS', 'MD' ],
       biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum feugiat varius.',
-      fees:500
+      fees:500,
+      treatments: [{name:"Treatment 1",description:"lorem ipsum dolore sit amet"},{name:"Treatment 2",description:"lorem ipsum dolore sit amet"}]
     }
   ]
   return (
@@ -191,7 +207,7 @@ export default function App() {
         <Route path="/" element={<Login/>}/>
         <Route path="/dashboard" element={<Dashboard doctors={doctors}/>}/>
         <Route path="/dashboard/:doctorName" element={<DoctorDetails doctors={doctors}/>}/>
-          
+        <Route path="/doctor" element={<DoctorProfile doctors={doctors}/>}/>
       </Routes>
     </div>
   )

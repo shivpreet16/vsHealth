@@ -14,7 +14,7 @@ import audio from "../assets/Audio_b.png";
 import clinic from "../assets/In-Clinic.png";
 import video from "../assets/video_b.png";
 import DateTabs from "./DateTabs";
-
+import { useNavigate } from "react-router-dom";
 
 const BookingBody = ({ name, specialization, gender, fees }) => {
   const imagePath = gender === "Male" ? doctorMaleImage : doctorFemaleImage;
@@ -24,6 +24,12 @@ const BookingBody = ({ name, specialization, gender, fees }) => {
     "dsfasdfasdfasdf",
     "asdfasdfasdfasd",
   ];
+  const nav=new useNavigate()
+  
+  const handleViewProfile = (e) => {
+    e.preventDefault();
+    nav("/doctor", { state: name })
+  }
 
   function a11yProps(index) {
     return {
@@ -67,6 +73,8 @@ const BookingBody = ({ name, specialization, gender, fees }) => {
               },
               height: "2.8em",
             }}
+
+            onClick={handleViewProfile}
           >
             View Profile
           </Button>
