@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import { styled } from "@mui/system";
 import state from "../state";
 import { useSnapshot } from "valtio";
+import axios from "axios";
 
 const CustomTabs = styled(Tabs)({
   indicatorColor: "green",
@@ -15,11 +16,28 @@ const GreenTextTab = styled(Tab)({
   width: "25vw",
 });
 
-export default function DateTabs() {
+export default function DateTabs({ setSlot, cid, did }) {
   const [value, setValue] = useState(0);
+  const handleChange=(e,newValue)=>{
+    setValue(newValue)
+  }
+  const handleClick = async (date) => {
+    state.date = date;
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+    if (cid != -1) {
+      const body = {
+        did: did,
+        cid: cid,
+        day: getDayName(date),
+      };
+
+      axios
+        .post("https://localhost:3000/doctor/getTimeSlots", body)
+        .then((res) => {
+          setSlot(res.data);
+        })
+        .catch((e) => console.log(e));
+    }
   };
 
   const getMonthName = (month) => {
@@ -54,14 +72,21 @@ export default function DateTabs() {
   };
 
   const getDayName = (date) => {
-    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
     return daysOfWeek[date.getDay()];
   };
 
   const dates = generateDates();
-  const snap= useSnapshot(state)
-  
-  
+  const snap = useSnapshot(state);
+
   return (
     <Box
       sx={{
@@ -89,9 +114,7 @@ export default function DateTabs() {
         {dates.map((date, index) => (
           <GreenTextTab
             key={index}
-            onClick={(e) => {
-              state.date=date
-            }}
+            onClick={(e)=>handleClick(date)}
             label={
               <div className="flex flex-col gap-2">
                 <span className="text-black font-bold">

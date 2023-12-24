@@ -137,17 +137,25 @@ async function getSlotTime({did,cid,day}){
       }
     })
     
-    // console.log(slotTime)
-    return slotTime
+    const slotTimeArr = slotTime.map((slot) => (
+      {
+        sid:slot.sid,
+        time:slot.time
+      }
+    ));
+    return slotTimeArr
   }catch(error){
     console.error("Error retrieving slot time:", error);
     throw error;
-
   }
 }
 router.route("/getTimeSlots").post((req,res)=>{
   const body=req.body
-  getSlotTime(body).then(r=>console.log(r)).catch(e=>console.log(e))
-  res.send("ok")
+  getSlotTime(body).then(r=>{
+    res.send(r)
+  }).catch(e=>{
+    console.error(e)
+    res.send("Internal server error")
+  })
 })
 module.exports = router;

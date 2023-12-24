@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   RadioGroup,
   Typography,
+  ToggleButton,
 } from "@mui/material";
 import doctorMaleImage from "../assets/doctor_Male.svg";
 import doctorFemaleImage from "../assets/doctor_Female.svg";
@@ -18,11 +19,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import state from "../state";
 import { useSnapshot } from "valtio";
+import DoctorHeader from "./DoctorHeader";
 
 const BookingBody = ({ id, name, specialization, gender, fees }) => {
   const imagePath = gender === "Male" ? doctorMaleImage : doctorFemaleImage;
   const [isClinic, setIsClinic] = useState(true);
   const [clinics, setClinics] = useState([]);
+  const [slot, setSlot] = useState([]);
+  const [selectedTime, setSelectedTime] = useState(-1);
+  const [selectedClinic, setSelectedClinic] = useState(-1);
 
   const nav = new useNavigate();
   const snap = useSnapshot(state);
@@ -68,8 +73,8 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
 
   const handleRadioChange = async (e) => {
     const cid = e.target.value;
+    setSelectedClinic(cid)
     if (cid != undefined) {
-      console.log("cid:", cid);
       if (!snap.date) state.date = new Date();
 
       const body = {
@@ -80,38 +85,15 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
 
       axios
         .post("https://localhost:3000/doctor/getTimeSlots", body)
-        .then((res) => console.log(res))
+        .then((res) => {
+          setSlot(res.data);
+        })
         .catch((e) => console.log(e));
     }
   };
   return (
     <div className="bg-white w-screen lg:w-3/4">
-      <div className="pt-7 lg:pt-8 flex gap-4 sm:gap-16 mx-10 sm:ml-20 lg:mx-0 border-b-[1px] pb-4 ">
-        <Avatar
-          alt="doctor avatar"
-          sx={{ width: 75, height: 75, marginLeft: 5 }}
-          src={imagePath}
-        />
-        <div>
-          <h3 className=" font-black leading-5">{name}</h3>
-          <h4 className="text-xs mb-2">{specialization}</h4>
-          <Button
-            variant="outlined"
-            size="small"
-            sx={{
-              fontWeight: "bolder",
-              fontSize: "0.7rem",
-              "&:hover": {
-                textDecoration: "underline",
-              },
-              height: "2.8em",
-            }}
-            onClick={handleViewProfile}
-          >
-            View Profile
-          </Button>
-        </div>
-      </div>
+      <DoctorHeader name={name} specialization={specialization} gender={gender}/>
 
       <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row justify-between mx-16 lg:mx-6 pt-4">
         <div className="flex flex-row lg:flex-col justify-between">
@@ -154,7 +136,7 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
       </div>
 
       <div
-        className={`mx-16 lg:mx-6 pt-10 ${
+        className={`mx-5 md:mx-16 lg:mx-6 pt-10 ${
           isClinic === true ? "block" : "hidden"
         }`}
       >
@@ -176,10 +158,42 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
             ))}
           </RadioGroup>
         </FormControl>
-      </div>
-
-      <div className="mt-10">
-        <DateTabs />
+        <div className="mt-10 pb-10 relative">
+          <DateTabs setSlot={setSlot} cid={selectedClinic} did={id}/>
+          <ul className="h-fit gap-5 min-h-[40vh] bg-slate-100 text-xs md:text-sm grid grid-cols-3 justify-center px-2  pt-16 pb-5">
+            {slot.map((i) => (
+              <li
+                key={i.sid}
+                value={i.sid}
+                onClick={(e) => {
+                  setSelectedTime(e.target.value);
+                  console.log(e.target.value);
+                }}
+                className={`border-2 rounded-md grid justify-center items-center hover:bg-slate-200 duration-100 cursor-pointer ${
+                  i.sid === selectedTime
+                    ? "bg-[#64BC6E] text-white"
+                    : "text-black"
+                }`}
+              >
+                {i.time}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-5">
+            <Button 
+            sx={{
+              bgcolor:"#64BC6E",
+              fontWeight:"bold",
+              '&:hover':{
+                bgcolor:"white",
+                color:"#64BC6E",
+              }
+            }}
+            variant="contained" onClick={(e) => {}}>
+              submit
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

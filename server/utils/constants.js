@@ -883,7 +883,35 @@ const slotData=[
     cid: 3,
     day: 'Friday',
     time: '09:00 AM'
-  }
+  },
+  {
+    sid: 46,
+    did: '658828cf8a341add00cdc36a',
+    cid: 3,
+    day: 'Friday',
+    time: '09:15 AM'
+  },
+  {
+    sid: 47,
+    did: '658828cf8a341add00cdc36a',
+    cid: 3,
+    day: 'Friday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 48,
+    did: '658828cf8a341add00cdc36a',
+    cid: 3,
+    day: 'Friday',
+    time: '12:00 PM'
+  },
+  {
+    sid: 49,
+    did: '658828cf8a341add00cdc36a',
+    cid: 3,
+    day: 'Friday',
+    time: '11:00 AM'
+  },
 ]
 
 module.exports = {
