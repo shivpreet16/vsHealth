@@ -57,6 +57,7 @@ const Login = () => {
           alert(res.data.message);
         } else {
           setCookie('vsHealth',JSON.stringify(res.data),1)
+          //set context true
           nav("/dashboard", { state: email });
           // alert(res.data.token);
         }

@@ -4,7 +4,6 @@ const nodemailer = require("nodemailer");
 const Users = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
-const verifyJWT = require("../utils/verifyJWT")
 
 function generateOTP() {
   const otp = Math.floor(100000 + crypto.randomInt(999999));
@@ -86,7 +85,6 @@ router.route("/checkOTP").post((req,res)=>{
   const {email,otp}=req.body;
 
   Users.checkOTP(email,otp).then(message=>{
-    // console.log(message)
     const payload={
       email:email
     }
@@ -107,13 +105,17 @@ router.route("/checkOTP").post((req,res)=>{
 })
 
 router.route("/authenticate").post((req,res)=>{
-  const cookie=req.body
-  if(verifyJWT(cookie.token)){
-    res.send(1)
-  }
-  else
-    res.send(0)
-  
+  const {cookie}=req.body
+
+  jwt.verify(cookie.token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      console.error("Token verification failed:", err.message);
+      res.send( "not verified")
+
+    } else {
+        console.log(decoded)
+        res.send( "verified")
+    }});  
 })
 
 module.exports = router;
