@@ -158,4 +158,53 @@ router.route("/getTimeSlots").post((req,res)=>{
     res.send("Internal server error")
   })
 })
+
+async function getCountByDay(did,cid) {
+  try {
+    const result = await Slots.findAll({
+      attributes: [
+        [Sequelize.fn('COUNT', Sequelize.col('*')), 'slotCount'],
+        'day',
+      ],
+      where:{
+        did:did,
+        cid:cid
+      },
+      group: ['day'],
+    });
+
+    const formattedResult = {};
+
+    const daysOfWeek = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+
+    daysOfWeek.forEach((day) => {
+      formattedResult[day] = '-';
+    });
+
+    result.forEach((row) => {
+      const day = row.get('day');
+      const slotCount = row.get('slotCount');
+      formattedResult[day] = slotCount;
+    });
+
+    return formattedResult;
+  } catch (error) {
+    console.error('Error getting count by day:', error);
+    throw error;
+  }
+}
+router.route("/getNumberOfSlots").post((req,res)=>{
+  getCountByDay(req.body.did,req.body.cid).then(resp=>{
+    // console.log(resp)
+    res.send(resp)
+  }).catch(e=>res.send("Inernal Server Error at /getNumberOfSlots"))
+})
 module.exports = router;

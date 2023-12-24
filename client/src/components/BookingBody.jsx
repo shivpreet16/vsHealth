@@ -159,7 +159,7 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
           </RadioGroup>
         </FormControl>
         <div className="mt-10 pb-10 relative">
-          <DateTabs setSlot={setSlot} cid={selectedClinic} did={id}/>
+          <DateTabs setSlot={setSlot} cid={selectedClinic} did={id} />
           <ul className="h-fit gap-5 min-h-[40vh] bg-slate-100 text-xs md:text-sm grid grid-cols-3 justify-center px-2  pt-16 pb-5">
             {slot.map((i) => (
               <li
