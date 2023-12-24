@@ -39,9 +39,12 @@ CREATE TABLE slot_av(
 ```
 
 ```
-CREATE TABLE user(
+CREATE TABLE users(
     uid INTEGER PRIMARY KEY,
-    email VARCHAR(255) UNIQUE
+    email VARCHAR(255) UNIQUE,
+    currOTP INTEGER,
+    timestamp TIMESTAMP,
+    valid BOOLEAN
 );
 ```
 

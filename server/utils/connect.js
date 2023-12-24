@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Sequelize = require("sequelize");
-
+ 
 const mongoConnect = () => {
   mongoose
     .connect("mongodb://localhost:27017/test")
@@ -26,7 +26,7 @@ const sqlConnect = () => {
     .catch((error) => {
       console.log(error);
     });
-    return connection
+  return connection;
 };
 
 module.exports = {
