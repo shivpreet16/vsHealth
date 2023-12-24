@@ -7,10 +7,10 @@ import state from '../state';
 import { useSnapshot } from "valtio";
 
 const DoctorDetails = () => {
-  const { doctorName } = useParams();
-
+  const { doctorId } = useParams();
+  console.log(doctorId)
   const snap=useSnapshot(state)
-  const selectedDoctor = snap.doctors.find((doctor) => doctor.name === doctorName);
+  const selectedDoctor = snap.doctors.find((doctor) => doctor._id === doctorId);
   
   return (
     <div>

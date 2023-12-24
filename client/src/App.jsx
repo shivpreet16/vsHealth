@@ -45,9 +45,6 @@ export default function App() {
     checkAuthentication();
   }, []);
 
-  console.log("snap", snap.isAuthenticated);
-  console.log("state", state.isAuthenticated);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -58,7 +55,7 @@ export default function App() {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={state.isAuthenticated ? <Dashboard /> : <Navigate to="/" replace />} />
         <Route
-          path="/dashboard/:doctorName"
+          path="/dashboard/:doctorId"
           element={state.isAuthenticated ? <DoctorDetails /> : <Navigate to="/" replace />}
         />
         <Route path="/doctor" element={state.isAuthenticated ? <DoctorProfile doctors={doctors} /> : <Navigate to="/" replace />}/>

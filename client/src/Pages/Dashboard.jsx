@@ -1,39 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { Typography, Button } from "@mui/material";
 import axios from "axios";
-import state from '../state';
+import state from "../state";
 import { useSnapshot } from "valtio";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import DoctorAutocomplete from "../components/DoctorAutocomplete";
+import DashboardNav from "../components/DashboardNav";
 
 const Dashboard = () => {
   const location = useLocation();
   const email = location.state;
-  
-  // const [doctors, setDoctors] = useState([]);
-  
+
   useEffect(() => {
     axios
-    .get("https://localhost:3000/doctor/getDoctors")
-    .then((response) => {
-      // setDoctors(response.data);
-      state.doctors=response.data
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .get("https://localhost:3000/doctor/getDoctors")
+      .then((response) => {
+        state.doctors = response.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const snap = useSnapshot(state);
   return (
-    <div>
-      <h2>List of Doctors</h2>
-      <ul>
-        {snap.doctors.map((doctor) => (
-          <li key={doctor._id}>
-            <Link to={`/dashboard/${doctor.name}`}>{doctor.name}</Link>
-          </li>
-        ))}
-      </ul>
+    <div className="flex items-center w-screen h-screen flex-col">
+      <DashboardNav />
+      <div className="mt-10 text-[50px]">Search for Doctor</div>
+      <DoctorAutocomplete doctors={snap.doctors}/>
     </div>
   );
 };
