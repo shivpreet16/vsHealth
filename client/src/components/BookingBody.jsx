@@ -5,21 +5,14 @@ import {
   Radio,
   FormControl,
   FormControlLabel,
-  FormLabel,
   RadioGroup,
   Typography,
-  Tabs,
-  Tab,
-  Box
 } from "@mui/material";
 import doctorMaleImage from "../assets/doctor_Male.svg";
 import doctorFemaleImage from "../assets/doctor_Female.svg";
 import audio from "../assets/Audio_b.png";
 import clinic from "../assets/In-Clinic.png";
 import video from "../assets/video_b.png";
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
 import DateTabs from "./DateTabs";
 
 
@@ -151,7 +144,10 @@ const BookingBody = ({ name, specialization, gender, fees }) => {
       </div>
 
       {/* time slots */}
+      <div className="mt-10">
+
       <DateTabs />
+      </div>
     </div>
   );
 };
