@@ -15,28 +15,30 @@ import clinic from "../assets/In-Clinic.png";
 import video from "../assets/video_b.png";
 import DateTabs from "./DateTabs";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import state from "../state";
+import { useSnapshot } from "valtio";
 
-const BookingBody = ({ name, specialization, gender, fees }) => {
+const BookingBody = ({ id, name, specialization, gender, fees }) => {
   const imagePath = gender === "Male" ? doctorMaleImage : doctorFemaleImage;
   const [isClinic, setIsClinic] = useState(true);
-  const clinics = [
-    "kldjfalk;sdjfsjkakfjaslkdjfkas",
-    "dsfasdfasdfasdf",
-    "asdfasdfasdfasd",
-  ];
-  const nav=new useNavigate()
-  
+  const [clinics, setClinics] = useState([]);
+
+  const nav = new useNavigate();
+  const snap = useSnapshot(state);
+
+  useEffect(() => {
+    axios
+      .post("https://localhost:3000/doctor/getClinics", { did: id })
+      .then((response) => {
+        setClinics(response.data);
+      })
+      .catch((e) => console.log(e));
+  }, []);
   const handleViewProfile = (e) => {
     e.preventDefault();
-    nav("/doctor", { state: name })
-  }
-
-  function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`,
-    };
-  }
+    nav("/doctor", { state: id });
+  };
 
   const handleInClinic = (e) => {
     e.preventDefault();
@@ -50,9 +52,40 @@ const BookingBody = ({ name, specialization, gender, fees }) => {
     e.preventDefault();
     setIsClinic(false);
   };
+
+  const getDayName = (date) => {
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    return daysOfWeek[date.getDay()];
+  };
+
+  const handleRadioChange = async (e) => {
+    const cid = e.target.value;
+    if (cid != undefined) {
+      console.log("cid:", cid);
+      if (!snap.date) state.date = new Date();
+
+      const body = {
+        did: id,
+        cid: cid,
+        day: getDayName(snap.date),
+      };
+
+      axios
+        .post("https://localhost:3000/doctor/getTimeSlots", body)
+        .then((res) => console.log(res))
+        .catch((e) => console.log(e));
+    }
+  };
   return (
     <div className="bg-white w-screen lg:w-3/4">
-      {/* intro */}
       <div className="pt-7 lg:pt-8 flex gap-4 sm:gap-16 mx-10 sm:ml-20 lg:mx-0 border-b-[1px] pb-4 ">
         <Avatar
           alt="doctor avatar"
@@ -73,7 +106,6 @@ const BookingBody = ({ name, specialization, gender, fees }) => {
               },
               height: "2.8em",
             }}
-
             onClick={handleViewProfile}
           >
             View Profile
@@ -81,7 +113,6 @@ const BookingBody = ({ name, specialization, gender, fees }) => {
         </div>
       </div>
 
-      {/* appointment */}
       <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row justify-between mx-16 lg:mx-6 pt-4">
         <div className="flex flex-row lg:flex-col justify-between">
           <p className="font-black">Book Appointment</p>
@@ -122,7 +153,6 @@ const BookingBody = ({ name, specialization, gender, fees }) => {
         </div>
       </div>
 
-      {/* clinic */}
       <div
         className={`mx-16 lg:mx-6 pt-10 ${
           isClinic === true ? "block" : "hidden"
@@ -134,27 +164,22 @@ const BookingBody = ({ name, specialization, gender, fees }) => {
           >
             Clinic Name
           </Typography>
-          <RadioGroup
-            name="quiz"
-            //   value={value}
-            //   onChange={handleRadioChange}
-          >
+          <RadioGroup name="clinic">
             {clinics.map((clinic) => (
               <FormControlLabel
-                value={clinic}
+                onClick={handleRadioChange}
+                value={clinic.cid}
                 control={<Radio color="success" />}
-                label={clinic}
-                key={clinic}
+                label={clinic.addr}
+                key={clinic.cid}
               />
             ))}
           </RadioGroup>
         </FormControl>
       </div>
 
-      {/* time slots */}
       <div className="mt-10">
-
-      <DateTabs />
+        <DateTabs />
       </div>
     </div>
   );

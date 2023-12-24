@@ -10,8 +10,7 @@
 CREATE TABLE clinic(
     cid integer primary key,
     address varchar(255),
-    phNo varchar(255),
-    cemail varchar(255)
+    phNo varchar(255)
 );
 ```
 

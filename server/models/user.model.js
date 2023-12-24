@@ -76,7 +76,6 @@ Users.updateOrCreateByEmail = async function (email, otp) {
     }
     const curr = new Date();
     if (curr - user.timestamp < 2 * 60 * 100) {
-      console.log(curr - user.timestamp);
       return { user, created: false, isValidRequest: 0 };
     }
 

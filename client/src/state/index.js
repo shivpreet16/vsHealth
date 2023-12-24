@@ -2,7 +2,8 @@ import { proxy } from 'valtio'
 
 const state = proxy({
     isAuthenticated:false,
-    doctors:[]
+    doctors:[],
+    date:null
 })
 
 export default state;

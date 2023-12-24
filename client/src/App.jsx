@@ -13,6 +13,7 @@ export default function App() {
   const snap = useSnapshot(state);
   const doctors = [];
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingData, setIsLoadingData] = useState(true);
 
   const getCookie = (name) => {
     return Cookies.get(name);
@@ -41,11 +42,26 @@ export default function App() {
         }
       }
     };
-
+    
     checkAuthentication();
   }, []);
+  
+  
+  useEffect(() => {
+    axios
+    .get("https://localhost:3000/doctor/getDoctors")
+    .then((response) => {
+      state.doctors = response.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    }).finally(()=>{
+      setIsLoadingData(false);
+      
+      })
+  }, []);
 
-  if (isLoading) {
+  if (isLoading || isLoadingData) {
     return <div>Loading...</div>;
   }
 

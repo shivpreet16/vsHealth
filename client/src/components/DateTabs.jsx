@@ -1,30 +1,44 @@
-import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { styled } from '@mui/system';
+import { styled } from "@mui/system";
+import state from "../state";
+import { useSnapshot } from "valtio";
 
 const CustomTabs = styled(Tabs)({
-  indicatorColor: 'green',
+  indicatorColor: "green",
 });
 
 const GreenTextTab = styled(Tab)({
-  color: 'green',
-  width: '25vw',
+  color: "green",
+  width: "25vw",
 });
 
 export default function DateTabs() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    console.log(newValue)
   };
 
-  const getMonthName=(month)=>{
-    const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
-    return months[month]
-  }
+  const getMonthName = (month) => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    return months[month];
+  };
 
   const generateDates = () => {
     const currentDate = new Date();
@@ -44,14 +58,15 @@ export default function DateTabs() {
     return daysOfWeek[date.getDay()];
   };
 
-
   const dates = generateDates();
-
+  const snap= useSnapshot(state)
+  
+  
   return (
     <Box
       sx={{
         flexGrow: 1,
-        maxWidth: '100vw',
+        maxWidth: "100vw",
         bgcolor: "background.paper",
       }}
     >
@@ -62,7 +77,7 @@ export default function DateTabs() {
         TabIndicatorProps={{
           style: {
             backgroundColor: "green",
-          }
+          },
         }}
         scrollButtons
         sx={{
@@ -72,18 +87,26 @@ export default function DateTabs() {
         }}
       >
         {dates.map((date, index) => (
-          <GreenTextTab key={index} 
-          onClick={(e)=>{
-            console.log(date)
-          }}
-          label={
-            <div className="flex flex-col gap-2">
-              <span className="text-black font-bold">
-                {index === 0 ? "Today" : index === 1 ? "Tomorrow" : `${getDayName(date)}, ${date.getDate()}/${getMonthName(date.getMonth())}`}
-              </span>
-              <span className="text-xs">8 slots available</span>
-            </div>
-          } />
+          <GreenTextTab
+            key={index}
+            onClick={(e) => {
+              state.date=date
+            }}
+            label={
+              <div className="flex flex-col gap-2">
+                <span className="text-black font-bold">
+                  {index === 0
+                    ? "Today"
+                    : index === 1
+                    ? "Tomorrow"
+                    : `${getDayName(date)}, ${date.getDate()}/${getMonthName(
+                        date.getMonth()
+                      )}`}
+                </span>
+                <span className="text-xs">8 slots available</span>
+              </div>
+            }
+          />
         ))}
       </CustomTabs>
     </Box>

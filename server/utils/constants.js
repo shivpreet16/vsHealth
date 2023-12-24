@@ -1,4 +1,4 @@
-const data = [
+const doctorData = [
   {
     name: "Dr. Taylor",
     experience: 2,
@@ -556,4 +556,338 @@ const data = [
   },
 ];
 
-module.exports = data;
+const clinicData = [
+  ["Manik Dalvi's Clinic, Street Name, New York, NY, 10001", '+1 56-653-1504'],
+  ["ABC Medical Center, Street Name, Los Angeles, CA, 90001",  '+1 199-289-763'],
+  ["City Health Clinic, Street Name, Chicago, IL, 60601", '+1 990-297-6192'],
+  ["Elite Wellness Center, Street Name, Houston, TX, 77001",'+1 923-583-4474'],
+  ["Sunrise Healthcare, Street Name, Phoenix, AZ, 85001",'+1 927-755-9206'],
+  ["Wellness First Clinic, Street Name, Philadelphia, PA, 19101", '+1 504-785-5213'],
+  ["Healing Hands Clinic, Street Name, San Antonio, TX, 78201", '+1 504-785-5213'],
+  ["Community Care Center, Street Name, San Diego, CA, 92101", '+1 504-785-5213'],
+  ["Metro Health Services, Street Name, Dallas, TX, 75201", '+1 504-785-5213'],
+  ["Greenland Medical Associates, Street Name, San Jose, CA, 95101", '+1 504-785-5213'],
+];
+
+const slotData=[
+  {
+    sid: 1,
+    did: '658828cf8a341add00cdc38e',
+    cid: 9,
+    day: 'Monday',
+    time: '02:00 PM'
+  },
+  {
+    sid: 2,
+    did: '658828cf8a341add00cdc3ac',
+    cid: 9,
+    day: 'Thursday',
+    time: '11:00 AM'
+  },
+  {
+    sid: 3,
+    did: '658828cf8a341add00cdc382',
+    cid: 2,
+    day: 'Wednesday',
+    time: '03:00 PM'
+  },
+  {
+    sid: 4,
+    did: '658828cf8a341add00cdc3a0',
+    cid: 3,
+    day: 'Thursday',
+    time: '02:00 PM'
+  },
+  {
+    sid: 5,
+    did: '658828cf8a341add00cdc382',
+    cid: 10,
+    day: 'Friday',
+    time: '03:00 PM'
+  },
+  {
+    sid: 6,
+    did: '658828cf8a341add00cdc3b2',
+    cid: 7,
+    day: 'Friday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 7,
+    did: '658828cf8a341add00cdc37c',
+    cid: 10,
+    day: 'Wednesday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 8,
+    did: '658828cf8a341add00cdc3b8',
+    cid: 7,
+    day: 'Tuesday',
+    time: '11:00 AM'
+  },
+  {
+    sid: 9,
+    did: '658828cf8a341add00cdc3b8',
+    cid: 10,
+    day: 'Thursday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 10,
+    did: '658828cf8a341add00cdc38e',
+    cid: 6,
+    day: 'Wednesday',
+    time: '09:00 AM'
+  },
+  {
+    sid: 11,
+    did: '658828cf8a341add00cdc3b8',
+    cid: 8,
+    day: 'Friday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 12,
+    did: '658828cf8a341add00cdc3a6',
+    cid: 7,
+    day: 'Monday',
+    time: '11:00 AM'
+  },
+  {
+    sid: 13,
+    did: '658828cf8a341add00cdc3ac',
+    cid: 8,
+    day: 'Wednesday',
+    time: '11:00 AM'
+  },
+  {
+    sid: 14,
+    did: '658828cf8a341add00cdc388',
+    cid: 10,
+    day: 'Wednesday',
+    time: '02:00 PM'
+  },
+  {
+    sid: 15,
+    did: '658828cf8a341add00cdc36a',
+    cid: 1,
+    day: 'Thursday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 16,
+    did: '658828cf8a341add00cdc3a6',
+    cid: 8,
+    day: 'Monday',
+    time: '03:00 PM'
+  },
+  {
+    sid: 17,
+    did: '658828cf8a341add00cdc382',
+    cid: 4,
+    day: 'Friday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 18,
+    did: '658828cf8a341add00cdc3ac',
+    cid: 1,
+    day: 'Tuesday',
+    time: '09:00 AM'
+  },
+  {
+    sid: 19,
+    did: '658828cf8a341add00cdc3a6',
+    cid: 6,
+    day: 'Thursday',
+    time: '02:00 PM'
+  },
+  {
+    sid: 20,
+    did: '658828cf8a341add00cdc376',
+    cid: 5,
+    day: 'Monday',
+    time: '11:00 AM'
+  },
+  {
+    sid: 21,
+    did: '658828cf8a341add00cdc3ac',
+    cid: 8,
+    day: 'Wednesday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 22,
+    did: '658828cf8a341add00cdc3b8',
+    cid: 9,
+    day: 'Wednesday',
+    time: '11:00 AM'
+  },
+  {
+    sid: 23,
+    did: '658828cf8a341add00cdc370',
+    cid: 1,
+    day: 'Friday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 24,
+    did: '658828cf8a341add00cdc394',
+    cid: 2,
+    day: 'Monday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 25,
+    did: '658828cf8a341add00cdc39a',
+    cid: 9,
+    day: 'Tuesday',
+    time: '02:00 PM'
+  },
+  {
+    sid: 26,
+    did: '658828cf8a341add00cdc3a0',cid: 1,
+    day: 'Wednesday',
+    time: '09:00 AM'
+  },
+  {
+    sid: 27,
+    did: '658828cf8a341add00cdc3a0',
+    cid: 7,
+    day: 'Friday',
+    time: '03:00 PM'
+  },
+  {
+    sid: 28,
+    did: '658828cf8a341add00cdc382',
+    cid: 4,
+    day: 'Thursday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 29,
+    did: '658828cf8a341add00cdc376',
+    cid: 4,
+    day: 'Friday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 30,
+    did: '658828cf8a341add00cdc3a6',
+    cid: 5,
+    day: 'Tuesday',
+    time: '09:00 AM'
+  },
+  {
+    sid: 31,
+    did: '658828cf8a341add00cdc39a',
+    cid: 4,
+    day: 'Tuesday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 32,
+    did: '658828cf8a341add00cdc376',
+    cid: 2,
+    day: 'Friday',
+    time: '11:00 AM'
+  },
+  {
+    sid: 33,
+    did: '658828cf8a341add00cdc37c',
+    cid: 3,
+    day: 'Thursday',
+    time: '11:00 AM'
+  },
+  {
+    sid: 34,
+    did: '658828cf8a341add00cdc3a6',
+    cid: 8,
+    day: 'Monday',
+    time: '11:00 AM'
+  },
+  {
+    sid: 35,
+    did: '658828cf8a341add00cdc3be',
+    cid: 5,
+    day: 'Monday',
+    time: '09:00 AM'
+  },
+  {
+    sid: 36,
+    did: '658828cf8a341add00cdc39a',
+    cid: 4,
+    day: 'Monday',
+    time: '09:00 AM'
+  },
+  {
+    sid: 37,
+    did: '658828cf8a341add00cdc3b2',
+    cid: 6,
+    day: 'Tuesday',
+    time: '03:00 PM'
+  },
+  {
+    sid: 38,
+    did: '658828cf8a341add00cdc3a0',
+    cid: 4,
+    day: 'Monday',
+    time: '02:00 PM'
+  },
+  {
+    sid: 39,
+    did: '658828cf8a341add00cdc38e',
+    cid: 4,
+    day: 'Tuesday',
+    time: '09:00 AM'
+  },
+  {
+    sid: 40,
+    did: '658828cf8a341add00cdc36a',
+    cid: 8,
+    day: 'Monday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 41,
+    did: '658828cf8a341add00cdc36a',
+    cid: 9,
+    day: 'Wednesday',
+    time: '10:00 AM'
+  },
+  {
+    sid: 42,
+    did: '658828cf8a341add00cdc3ac',
+    cid: 6,
+    day: 'Friday',
+    time: '03:00 PM'
+  },
+  {
+    sid: 43,
+    did: '658828cf8a341add00cdc3ac',
+    cid: 10,
+    day: 'Thursday',
+    time: '09:00 AM'
+  },
+  {
+    sid: 44,
+    did: '658828cf8a341add00cdc39a',
+    cid: 9,
+    day: 'Thursday',
+    time: '03:00 PM'
+  },
+  {
+    sid: 45,
+    did: '658828cf8a341add00cdc36a',
+    cid: 3,
+    day: 'Friday',
+    time: '09:00 AM'
+  }
+]
+
+module.exports = {
+  doctorData,
+  clinicData,
+  slotData
+};

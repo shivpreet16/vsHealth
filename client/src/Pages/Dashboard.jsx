@@ -12,16 +12,7 @@ const Dashboard = () => {
   const location = useLocation();
   const email = location.state;
 
-  useEffect(() => {
-    axios
-      .get("https://localhost:3000/doctor/getDoctors")
-      .then((response) => {
-        state.doctors = response.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  
 
   const snap = useSnapshot(state);
   return (

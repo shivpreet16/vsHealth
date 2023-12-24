@@ -3,7 +3,7 @@ import { Avatar, Typography, Box, Tab, Tabs } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import BookButton from "./BookButton";
 
-const ProfileNav = ({ doctorName }) => {
+const ProfileNav = ({ id, doctorName }) => {
   const nameSplit = doctorName.split(" ");
   const initials =
     nameSplit[1][0] +
@@ -97,7 +97,7 @@ const ProfileNav = ({ doctorName }) => {
                 {...a11yProps(3)}
               />
               <div className="px-2">
-                <BookButton />
+                <BookButton id={id} />
               </div>
             </Tabs>
           </Box>

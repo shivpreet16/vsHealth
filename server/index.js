@@ -7,7 +7,10 @@ const bodyParser = require("body-parser");
 const { mongoConnect, sqlConnect } = require("./utils/connect");
 const userRoute = require("./routes/user");
 const Users = require("./models/user.model");
+const Clinics = require("./models/clinics.model")
+const Slots=require("./models/slots.model")
 const doctorRoute = require("./routes/doctor")
+const clinicRoute = require("./routes/clinic")
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -38,11 +41,14 @@ const connection = sqlConnect();
 
 const syncTables = async()=>{
   await Users.sync()
+  await Clinics.sync()
+  await Slots.sync()
 }
 
 syncTables()
 
 app.use("/user", userRoute);
 app.use("/doctor", doctorRoute);
+app.use("/clinic", clinicRoute);
 
 

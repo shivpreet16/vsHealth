@@ -7,6 +7,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import BookButton from "./BookButton";
 
 const DoctorProfileBody = ({
+  id,
   doctorName,
   gender,
   specialization,
@@ -50,7 +51,7 @@ const DoctorProfileBody = ({
                 </div>
               ))}
             </div>
-           <BookButton />
+           <BookButton id={id} />
           </div>
         </div>
         <div className="mt-5 flex flex-col items-center justify-center md:px-10">

@@ -113,7 +113,6 @@ router.route("/authenticate").post((req,res)=>{
       res.send( "not verified")
 
     } else {
-        console.log(decoded)
         res.send( "verified")
     }});  
 })

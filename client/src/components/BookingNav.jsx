@@ -7,7 +7,7 @@ const BookingNav = ({name}) => {
     const nameSplit=name.split(" ")
     const initials= nameSplit[1][0] + (nameSplit.length==2?" ":nameSplit[nameSplit.length-1][0])
   return (
-    <div className='w-screen h-16 shadow-md lg:shadow-lg flex relative items-center justify-between px-10'>
+    <div className='w-screen h-16 shadow-md lg:shadow-lg flex relative items-center justify-between px-10 bg-white'>
         <Avatar sx={{ bgcolor: deepOrange[500] }}> {initials}</Avatar>
         <Typography className="text-blue-600">Help?</Typography>
     </div>
