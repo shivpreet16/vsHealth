@@ -3,26 +3,14 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import BookingNav from "../components/BookingNav";
 import BookingBody from "../components/BookingBody";
+import state from '../state';
+import { useSnapshot } from "valtio";
 
-const DoctorDetails = ({ doctors }) => {
+const DoctorDetails = () => {
   const { doctorName } = useParams();
 
-  // Find the selected doctor from the array
-  const selectedDoctor = doctors.find((doctor) => doctor.name === doctorName);
-
-  // if (!selectedDoctor) {
-  //   return <div>No doctor found with the name {doctorName}</div>;
-  // }
-
-  {
-    /*•	Name: string
-•	Biography: string
-•	Specialization: 
-•	Education: string[]
-•	Experience: number
-•	FAQ: {}
- */
-  }
+  const snap=useSnapshot(state)
+  const selectedDoctor = snap.doctors.find((doctor) => doctor.name === doctorName);
   
   return (
     <div>
