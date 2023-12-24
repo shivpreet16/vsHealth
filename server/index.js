@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const { mongoConnect, sqlConnect } = require("./utils/connect");
 const userRoute = require("./routes/user");
 const Users = require("./models/user.model");
+const doctorRoute = require("./routes/doctor")
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -42,12 +43,6 @@ const syncTables = async()=>{
 syncTables()
 
 app.use("/user", userRoute);
+app.use("/doctor", doctorRoute);
 
-// const userSchema= new mongoose.Schema({
-//     name:{
-//         type:String,
-//         required:true
-//     },
-// })
 
-// const user=mongoose.model('user',userSchema)

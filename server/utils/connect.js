@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
  
 const mongoConnect = () => {
   mongoose
-    .connect("mongodb://localhost:27017/test")
+    .connect("mongodb://localhost:27017/vsHealth")
     .then(() => {
       console.log("mongo db connected");
     })
