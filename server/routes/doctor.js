@@ -176,7 +176,7 @@ async function getSlotTimeAV({did,type,day,date}){
       where: Sequelize.where(
         Sequelize.fn('DATE', Sequelize.col('date')),
         '=',
-        Sequelize.fn('DATE', date)
+        Sequelize.fn('DATE', date),
       )
     });
     
