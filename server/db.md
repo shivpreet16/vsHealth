@@ -48,12 +48,16 @@ CREATE TABLE users(
 ```
 
 ```
-CREATE TABLE appointment(
+CREATE TABLE appointments(
     aid INTEGER PRIMARY KEY,
     uid INTEGER,
+    patientName VARCHAR(255),
     sid INTEGER,
+    savid INTEGER,
     date INTEGER,
-    FOREIGN KEY (uid) REFERENCES user(uid),
-    FOREIGN KEY (sid) REFERENCES slot(sid)
+    type INTEGER,
+    FOREIGN KEY (uid) REFERENCES users(uid),
+    FOREIGN KEY (sid) REFERENCES slots(sid)
+    FOREIGN KEY (savid) REFERENCES slotavs(sid)
 );
 ```

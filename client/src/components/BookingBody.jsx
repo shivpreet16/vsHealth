@@ -20,19 +20,27 @@ import axios from "axios";
 import state from "../state";
 import { useSnapshot } from "valtio";
 import DoctorHeader from "./DoctorHeader";
+import SelectAppointmentType from "./SelectAppointmentType";
+import Cookies from "js-cookie";
 
 const BookingBody = ({ id, name, specialization, gender, fees }) => {
   const imagePath = gender === "Male" ? doctorMaleImage : doctorFemaleImage;
-  const [isClinic, setIsClinic] = useState(true);
+  const [appointmentType, setAppointmentType] = useState(2);
   const [clinics, setClinics] = useState([]);
   const [slot, setSlot] = useState([]);
   const [selectedTime, setSelectedTime] = useState(-1);
   const [selectedClinic, setSelectedClinic] = useState(-1);
+  const [dayCount, setDayCount] = useState(null);
 
   const nav = new useNavigate();
   const snap = useSnapshot(state);
 
+  const getCookie = (name) => {
+    return Cookies.get(name);
+  }
+
   useEffect(() => {
+    if (!snap.date) state.date = new Date();
     axios
       .post("https://localhost:3000/doctor/getClinics", { did: id })
       .then((response) => {
@@ -45,31 +53,78 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
     e.preventDefault();
     nav("/doctor", { state: id });
   };
-  
-  const handleSubmit=(e)=>{
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const data={
-      cid:selectedClinic,
-      did:id,
-      
-    }
-  }
+    const data = {
+      cid: selectedClinic,
+      did: id,
+      token:JSON.parse(getCookie('vsHealth')).token,
+      type:appointmentType,
+      slotId:selectedTime,
+      fees:fees
+    };
+
+  };
 
   const handleInClinic = (e) => {
     e.preventDefault();
-    setIsClinic(true);
+    setAppointmentType(2);
+    setSelectedTime(-1);
+    setSelectedClinic(-1);
+    setSlot([])
+    setSelectedClinic(-1)
   };
   const handleAudio = (e) => {
     e.preventDefault();
-    setIsClinic(false);
-    setSelectedTime(-1)
+    setAppointmentType(0);
+    setSelectedTime(-1);
+    setSelectedClinic(-1);
+    setSlot([])
     setSelectedClinic(-1)
+
+    const body={
+      type:0,
+      did:id,
+      day:getDayName(snap.date)
+    }
+
+    axios.post("https://localhost:3000/doctor/getTimeSlots",body).then(r=>{
+      setSlot(r.data)
+    }).catch(e=>console.log(e))
+
+    axios
+        .post("https://localhost:3000/doctor/getNumberOfSlots", {
+          did:id,
+          type: 0,
+        })
+        .then((r) => setDayCount(r.data))
+        .catch((e) => console.log(e));
   };
   const handleVideo = (e) => {
     e.preventDefault();
-    setIsClinic(false);
-    setSelectedTime(-1)
+    setAppointmentType(1);
+    setSelectedTime(-1);
+    setSelectedClinic(-1);
+    setSlot([])
     setSelectedClinic(-1)
+    const body={
+      type:1,
+      did:id,
+      day:getDayName(snap.date)
+    }
+
+    axios.post("https://localhost:3000/doctor/getTimeSlots",body).then(r=>{
+      setSlot(r.data)
+    }).catch(e=>console.log(e))
+
+    axios
+        .post("https://localhost:3000/doctor/getNumberOfSlots", {
+          did:id,
+          type: 1,
+        })
+        .then((r) => setDayCount(r.data))
+        .catch((e) => console.log(e));
   };
 
   const getDayName = (date) => {
@@ -87,14 +142,15 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
 
   const handleRadioChange = async (e) => {
     const cid = e.target.value;
-    setSelectedClinic(cid)
+    setSelectedClinic(cid);
     if (cid != undefined) {
-      if (!snap.date) state.date = new Date();
+      
 
       const body = {
         did: id,
         cid: cid,
-        day: getDayName(snap.date)
+        day: getDayName(snap.date),
+        type:2
       };
 
       axios
@@ -107,7 +163,11 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
   };
   return (
     <div className="bg-white w-screen lg:w-3/4">
-      <DoctorHeader name={name} specialization={specialization} gender={gender}/>
+      <DoctorHeader
+        name={name}
+        specialization={specialization}
+        gender={gender}
+      />
 
       <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row justify-between mx-16 lg:mx-6 pt-4">
         <div className="flex flex-row lg:flex-col justify-between">
@@ -124,7 +184,7 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
             </p>
           </div>
         </div>
-        <div className="flex gap-8">
+        {/* <div className="flex gap-8">
           <div
             className="flex flex-col justify-center items-center relative cursor-pointer"
             onClick={handleInClinic}
@@ -146,39 +206,46 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
             <img src={video} className="" height={85} width={85} />
             <span className="absolute bottom-1">Video</span>
           </div>
-        </div>
+        </div> */}
+        <SelectAppointmentType
+          appointmentType={appointmentType}
+          setAppointmentType={setAppointmentType}
+          handleAudio={handleAudio}
+          handleVideo={handleVideo}
+          handleInClinic={handleInClinic}
+        />
       </div>
 
-      <div
-        className={`mx-5 md:mx-16 lg:mx-6 pt-10 ${
-          isClinic === true ? "block" : "hidden"
-        }`}
-      >
-        <FormControl sx={{}} variant="standard">
-          <Typography
-            sx={{ fontWeight: "bold", color: "black", fontFamily: "Poppins" }}
-          >
-            Clinic Name
-          </Typography>
-          <RadioGroup name="clinic">
-            {clinics.map((clinic) => (
-              <FormControlLabel
-                onClick={handleRadioChange}
-                value={clinic.cid}
-                control={<Radio color="success" />}
-                label={clinic.addr}
-                key={clinic.cid}
-              />
-            ))}
-          </RadioGroup>
-        </FormControl>
+      <div className={`mx-5 md:mx-16 lg:mx-6 pt-10 `}>
+        <div
+          className={`${(appointmentType == 2) === true ? "block" : "hidden"}`}
+        >
+          <FormControl sx={{}} variant="standard">
+            <Typography
+              sx={{ fontWeight: "bold", color: "black", fontFamily: "Poppins" }}
+            >
+              Clinic Name
+            </Typography>
+            <RadioGroup name="clinic">
+              {clinics.map((clinic) => (
+                <FormControlLabel
+                  onClick={handleRadioChange}
+                  value={clinic.cid}
+                  control={<Radio color="success" />}
+                  label={clinic.addr}
+                  key={clinic.cid}
+                />
+              ))}
+            </RadioGroup>
+          </FormControl>
+        </div>
         <div className="mt-10 pb-10 relative">
-          <DateTabs setSlot={setSlot} cid={selectedClinic} did={id} />
+          <DateTabs setSlot={setSlot} cid={selectedClinic} did={id} dayCount={dayCount} setDayCount={setDayCount} appointmentType={appointmentType}/>
           <ul className="h-fit gap-5 min-h-[40vh] bg-slate-100 text-xs md:text-sm grid grid-cols-3 justify-center px-2  pt-16 pb-5">
             {slot.map((i) => (
               <li
-                key={i.sid}
-                value={i.sid}
+                key={i.sid||i.savid}
+                value={i.sid||i.savid}
                 onClick={(e) => {
                   setSelectedTime(e.target.value);
                   console.log(e.target.value);
@@ -194,16 +261,18 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
             ))}
           </ul>
           <div className="mt-5">
-            <Button 
-            sx={{
-              bgcolor:"#64BC6E",
-              fontWeight:"bold",
-              '&:hover':{
-                bgcolor:"white",
-                color:"#64BC6E",
-              }
-            }}
-            variant="contained" onClick={handleSubmit}>
+            <Button
+              sx={{
+                bgcolor: "#64BC6E",
+                fontWeight: "bold",
+                "&:hover": {
+                  bgcolor: "white",
+                  color: "#64BC6E",
+                },
+              }}
+              variant="contained"
+              onClick={handleSubmit}
+            >
               submit
             </Button>
           </div>

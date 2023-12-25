@@ -914,8 +914,149 @@ const slotData=[
   },
 ]
 
+const slotAvData=[
+  {
+    did: '658828cf8a341add00cdc376',
+    type: 0,
+    day: 'Wednesday',
+    time: '10:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc370',
+    type: 1,
+    day: 'Friday',
+    time: '02:00 PM'
+  },
+  {
+    did: '658828cf8a341add00cdc3ac',
+    type: 0,
+    day: 'Wednesday',
+    time: '03:00 PM'
+  },
+  {
+    did: '658828cf8a341add00cdc376',
+    type: 1,
+    day: 'Friday',
+    time: '09:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc38e',
+    type: 1,
+    day: 'Tuesday',
+    time: '09:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc394',
+    type: 1,
+    day: 'Thursday',
+    time: '03:00 PM'
+  },
+  {
+    did: '658828cf8a341add00cdc38e',
+    type: 1,
+    day: 'Tuesday',
+    time: '10:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc3a6',
+    type: 1,
+    day: 'Wednesday',
+    time: '11:00 AM'
+  },
+  { did: undefined, type: 1, day: 'Friday', time: '09:00 AM' },
+  {
+    did: '658828cf8a341add00cdc37c',
+    type: 1,
+    day: 'Thursday',
+    time: '03:00 PM'
+  },
+  {
+    did: '658828cf8a341add00cdc3a6',
+    type: 1,
+    day: 'Thursday',
+    time: '10:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc3be',
+    type: 0,
+    day: 'Wednesday',
+    time: '10:00 AM'
+  },
+  { did: undefined, type: 1, day: 'Wednesday', time: '09:00 AM' },
+  {
+    did: '658828cf8a341add00cdc38e',
+    type: 1,
+    day: 'Wednesday',
+    time: '09:00 AM'
+  },
+  { did: undefined, type: 1, day: 'Wednesday', time: '02:00 PM' },
+  { did: undefined, type: 1, day: 'Monday', time: '10:00 AM' },
+  {
+    did: '658828cf8a341add00cdc3a0',
+    type: 1,
+    day: 'Friday',
+    time: '09:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc39a',
+    type: 1,
+    day: 'Monday',
+    time: '09:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc3be',
+    type: 1,
+    day: 'Friday',
+    time: '11:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc37c',
+    type: 1,
+    day: 'Friday',
+    time: '02:00 PM'
+  },
+  {
+    did: '658828cf8a341add00cdc3ac',
+    type: 1,
+    day: 'Tuesday',
+    time: '11:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc3be',
+    type: 0,
+    day: 'Monday',
+    time: '02:00 PM'
+  },
+  {
+    did: '658828cf8a341add00cdc3a6',
+    type: 0,
+    day: 'Friday',
+    time: '11:00 AM'
+  },
+  { did: undefined, type: 0, day: 'Monday', time: '11:00 AM' },
+  {
+    did: '658828cf8a341add00cdc39a',
+    type: 1,
+    day: 'Monday',
+    time: '09:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc394',
+    type: 0,
+    day: 'Wednesday',
+    time: '10:00 AM'
+  },
+  {
+    did: '658828cf8a341add00cdc3be',
+    type: 0,
+    day: 'Wednesday',
+    time: '11:00 AM'
+  }
+]
+
 module.exports = {
   doctorData,
   clinicData,
-  slotData
+  slotData,
+  slotAvData
 };

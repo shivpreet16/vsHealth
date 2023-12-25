@@ -16,7 +16,7 @@ const SlotAVs = connection.define('SlotAVs', {
     allowNull: false,
   },
   type: {
-    type: DataTypes.ENUM('0', '1'),
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   day: {

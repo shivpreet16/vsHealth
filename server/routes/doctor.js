@@ -4,7 +4,7 @@ const Slots = require("../models/slots.model");
 const Clinics = require("../models/clinics.model");
 const SlotAVs = require("../models/slotAV.model")
 const router = express.Router();
-const { doctorData, slotData } = require("../utils/constants");
+const { doctorData, slotData, slotAvData } = require("../utils/constants");
 const { Sequelize } = require("sequelize");
 
 router.route("/dummy").get((req, res) => {
@@ -150,14 +150,51 @@ async function getSlotTime({did,cid,day}){
     throw error;
   }
 }
+async function getSlotTimeAV({did,type,day}){
+  console.log(did)
+  console.log(type)
+  console.log(day)
+  try{
+    const slotTime=await SlotAVs.findAll({
+      attributes:['savid','time'],
+      where:{
+        type:type,
+        did:did,
+        day:day
+      }
+    })
+    
+    const slotTimeArr = slotTime.map((slot) => (
+      {
+        savid:slot.savid,
+        time:slot.time
+      }
+    ));
+    return slotTimeArr
+  }catch(error){
+    console.error("Error retrieving slot time:", error);
+    throw error;
+  }
+}
 router.route("/getTimeSlots").post((req,res)=>{
   const body=req.body
-  getSlotTime(body).then(r=>{
-    res.send(r)
-  }).catch(e=>{
-    console.error(e)
-    res.send("Internal server error")
-  })
+  if(body.type===2){
+
+    getSlotTime(body).then(r=>{
+      res.send(r)
+    }).catch(e=>{
+      console.error(e)
+      res.send("Internal server error")
+    })
+  }else{
+    getSlotTimeAV(body).then(r=>{
+      res.send(r)
+    }).catch(e=>{
+      console.error(e)
+      res.send("Internal server error")
+    })
+    
+  }
 })
 
 async function getCountByDay(did,cid) {
@@ -245,14 +282,14 @@ async function getCountByDayAV(did,type) {
   }
 }
 router.route("/getNumberOfSlots").post((req,res)=>{
-  if(req.body.appointmentType == 2){
+  if(req.body.type == 2){
     getCountByDay(req.body.did,req.body.cid).then(resp=>{
       // console.log(resp)
       res.send(resp)
     }).catch(e=>res.send("Inernal Server Error at /getNumberOfSlots"))
   }  else{
     //audio=0, video=1
-    getCountByDayAV(req.body.did,req.body.cid,req.body.appointmentType).then(resp=>{
+    getCountByDayAV(req.body.did,req.body.type).then(resp=>{
       console.log(resp)
       res.send(resp)
     }).catch(e=>res.send("Inernal Server Error at /getNumberOfSlots"))
@@ -260,5 +297,23 @@ router.route("/getNumberOfSlots").post((req,res)=>{
   }
 })
 
+router.route("/insertSlotAv").get((req,res)=>{
+  slotAvData.map((slot) => {
+    SlotAVs.create({
+      did: slot.did,
+      day: slot.day,
+      time: slot.time,
+      type:slot.type
+    })
+      .then((res) => {
+        console.log(res.toJSON());
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  });
+
+  res.send("ok");
+})
 
 module.exports = router;
