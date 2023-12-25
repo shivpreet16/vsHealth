@@ -39,7 +39,7 @@ Alternatively, you can also:
 
 For a good balance between performance and flexibility, I have used a polygot / hybrid architecture between SQL and NoSQL. Essentially, there are two types of databases at work:
 
-    1. *SQL*: I have used SQL for transaction heavy features. This includes clinic data, time slots, and appointment data.
+1. **SQL**: I have used SQL for transaction heavy features. This includes clinic data, time slots, and appointment data.
 
     For the SQL part, I used MySQL from XAMPP. The detailed schema and queries are present in `server > db.md`. However, on running the server, these will get created if they do not already exist. 
     
@@ -60,7 +60,7 @@ For a good balance between performance and flexibility, I have used a polygot / 
         }
         ``` 
 
-    2. *NoSQL*: I have used NoSQL for variable length data that will not change much and is required by simple retrieval and insertion queries. This includes all the doctor profile related data.
+2. **NoSQL**: I have used NoSQL for variable length data that will not change much and is required by simple retrieval and insertion queries. This includes all the doctor profile related data.
         
     The detailed schema can be seen in `server > models > doctors.model.js`
     
