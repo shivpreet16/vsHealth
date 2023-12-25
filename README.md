@@ -82,12 +82,23 @@ cd server
 ```
 npm install
 ```
-
-4. Run the server
+4. Create `.env` file in the server directory. Add the following data
+```
+PORT=3000
+EMAIL_ADDRESS="your-mailer@email.com"
+EMAIL_PASSWORD="your-password"
+BCRYPT_SALT_ROUNDS=10
+JWT_SECRET="your-jwt-secret"
+```
+5. Run the server
 ```
 npm start
 ```
 
 ##### 3. Populate the databases
 
-Dummy data is available in `server > utils > constants.js` and there are APIs.
+Dummy data is available in `server > utils > constants.js` and there are APIs to populate the database. Follow the given steps:
+1. Add doctor details to mongoDB using the following get request:
+```
+
+```
