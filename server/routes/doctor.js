@@ -3,6 +3,7 @@ const Doctors = require("../models/doctors.model");
 const Slots = require("../models/slots.model");
 const Clinics = require("../models/clinics.model");
 const SlotAVs = require("../models/slotAV.model")
+const Appointments = require("../models/appointments.model")
 const router = express.Router();
 const { doctorData, slotData, slotAvData } = require("../utils/constants");
 const { Sequelize } = require("sequelize");
@@ -124,33 +125,42 @@ router.route("/getClinics").post((req, res) => {
   });
 });
 
-async function getSlotTime({did,cid,day}){
+async function getSlotTime({did,cid,day,date}){
   console.log(did)
   console.log(cid)
   console.log(day)
+  console.log(date)
   try{
-    const slotTime=await Slots.findAll({
-      attributes:['sid','time'],
-      where:{
-        cid:cid,
-        did:did,
-        day:day
+    const slotTime = await Slots.findAll({
+      attributes: ['sid', 'time'],
+      where: {
+        cid: cid,
+        did: did,
+        day: day
       }
-    })
+    });
     
-    const slotTimeArr = slotTime.map((slot) => (
-      {
-        sid:slot.sid,
-        time:slot.time
-      }
-    ));
+    const Appointment = await Appointments.findAll({
+      attributes: ['sid'],
+      where: Sequelize.where(
+        Sequelize.fn('DATE', Sequelize.col('date')),
+        '=',
+        Sequelize.fn('DATE', date)
+      )
+    });
+    
+    const slotTimeArr = slotTime.map((slot) => ({
+      sid: slot.sid,
+      time: slot.time,
+      available: Appointment.some((appointment) => appointment.sid === slot.sid) ? 0 : 1
+    }));
     return slotTimeArr
   }catch(error){
     console.error("Error retrieving slot time:", error);
     throw error;
   }
 }
-async function getSlotTimeAV({did,type,day}){
+async function getSlotTimeAV({did,type,day,date}){
   try{
     const slotTime=await SlotAVs.findAll({
       attributes:['savid','time'],
@@ -161,12 +171,21 @@ async function getSlotTimeAV({did,type,day}){
       }
     })
     
-    const slotTimeArr = slotTime.map((slot) => (
-      {
-        savid:slot.savid,
-        time:slot.time
-      }
-    ));
+    const Appointment = await Appointments.findAll({
+      attributes: ['savid'],
+      where: Sequelize.where(
+        Sequelize.fn('DATE', Sequelize.col('date')),
+        '=',
+        Sequelize.fn('DATE', date)
+      )
+    });
+    
+    const slotTimeArr = slotTime.map((slot) => ({
+      savid: slot.savid,
+      time: slot.time,
+      available: Appointment.some((appointment) => appointment.savid === slot.savid) ? 0 : 1
+    }));
+
     return slotTimeArr
   }catch(error){
     console.error("Error retrieving slot time:", error);

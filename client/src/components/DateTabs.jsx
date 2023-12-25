@@ -16,10 +16,16 @@ const GreenTextTab = styled(Tab)({
   width: "25vw",
 });
 
-export default function DateTabs({ setSlot, cid, did, dayCount, setDayCount, appointmentType }) {
+export default function DateTabs({
+  setSlot,
+  cid,
+  did,
+  dayCount,
+  setDayCount,
+  appointmentType,
+}) {
   const [value, setValue] = useState(0);
   useEffect(() => {
-
     if (cid != undefined)
       axios
         .post("https://localhost:3000/doctor/getNumberOfSlots", {
@@ -42,41 +48,50 @@ export default function DateTabs({ setSlot, cid, did, dayCount, setDayCount, app
         did: did,
         cid: cid,
         day: getDayName(date),
-        type:2
+        type: 2,
+        date: date
       };
 
       axios
         .post("https://localhost:3000/doctor/getTimeSlots", body)
         .then((res) => {
+          console.log(res.data)
           setSlot(res.data);
         })
         .catch((e) => console.log(e));
     }
-    if(appointmentType==0){
-      const body={
-        type:0,
-        did:did,
-        day:getDayName(date)
-      }
+    if (appointmentType == 0) {
+      const body = {
+        type: 0,
+        did: did,
+        day: getDayName(date),
+        date: date
+      };
 
-      axios.post("https://localhost:3000/doctor/getTimeSlots",body).then(r=>{
-      setSlot(r.data)
-    }).catch(e=>console.log(e))
-
+      axios
+        .post("https://localhost:3000/doctor/getTimeSlots", body)
+        .then((r) => {
+          setSlot(r.data);
+        })
+        .catch((e) => console.log(e));
     }
-    if(appointmentType==1){
-      const body={
-        type:1,
-        did:did,
-        day:getDayName(date)
-      }
+    if (appointmentType == 1) {
+      const body = {
+        type: 1,
+        did: did,
+        day: getDayName(date),
+        date: date
+      };
 
-      axios.post("https://localhost:3000/doctor/getTimeSlots",body).then(r=>{
-      setSlot(r.data)
-    }).catch(e=>console.log(e))
-
+      axios
+        .post("https://localhost:3000/doctor/getTimeSlots", body)
+        .then((r) => {
+          setSlot(r.data);
+        })
+        .catch((e) => console.log(e));
     }
   };
+  const [booked, setBooked] = useState([])
 
   const getMonthName = (month) => {
     const months = [

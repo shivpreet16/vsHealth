@@ -96,10 +96,13 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
     const body={
       type:0,
       did:id,
-      day:getDayName(snap.date)
+      day:getDayName(snap.date),
+      date:snap.date
     }
+    
 
     axios.post("https://localhost:3000/doctor/getTimeSlots",body).then(r=>{
+      console.log(r.data)
       setSlot(r.data)
     }).catch(e=>console.log(e))
 
@@ -160,12 +163,15 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
         did: id,
         cid: cid,
         day: getDayName(snap.date),
-        type:2
+        type:2,
+        date:snap.date
       };
+      console.log(body)
 
       axios
         .post("https://localhost:3000/doctor/getTimeSlots", body)
         .then((res) => {
+          console.log(res.data)
           setSlot(res.data);
         })
         .catch((e) => console.log(e));
@@ -194,29 +200,6 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
             </p>
           </div>
         </div>
-        {/* <div className="flex gap-8">
-          <div
-            className="flex flex-col justify-center items-center relative cursor-pointer"
-            onClick={handleInClinic}
-          >
-            <img src={clinic} className="" height={85} width={85} />
-            <span className="absolute bottom-1 text-white">In-Clinic</span>
-          </div>
-          <div
-            className="flex flex-col justify-center items-center relative cursor-pointer"
-            onClick={handleAudio}
-          >
-            <img src={audio} className="" height={85} width={85} />
-            <span className="absolute bottom-1">Audio</span>
-          </div>
-          <div
-            className="flex flex-col justify-center items-center relative cursor-pointer"
-            onClick={handleVideo}
-          >
-            <img src={video} className="" height={85} width={85} />
-            <span className="absolute bottom-1">Video</span>
-          </div>
-        </div> */}
         <SelectAppointmentType
           appointmentType={appointmentType}
           setAppointmentType={setAppointmentType}
@@ -257,15 +240,24 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
                 key={i.sid||i.savid}
                 value={i.sid||i.savid}
                 onClick={(e) => {
-                  setSelectedTime(e.target.value);
-                  setSelectedTimeSlot(i.time)
-                  console.log(e.target.value);
+                  if(i.available===1){
+                    console.log(i.available);
+
+                    setSelectedTime(e.target.value);
+                    setSelectedTimeSlot(i.time)
+                  }
                 }}
                 className={`border-2 rounded-md grid justify-center items-center hover:bg-slate-200 duration-100 cursor-pointer ${
                   i.sid === selectedTime
                     ? "bg-[#64BC6E] text-white"
                     : "text-black"
-                }`}
+                } 
+                ${
+                  i.savid === selectedTime
+                    ? "bg-[#64BC6E] text-white"
+                    : "text-black"
+                }
+                ${i.available==0?"bg-slate-400 cursor-default hover:bg-slate-400":""}`}
               >
                 {i.time}
               </li>

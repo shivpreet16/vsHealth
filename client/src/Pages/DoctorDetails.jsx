@@ -14,7 +14,6 @@ const DoctorDetails = () => {
   const snap = useSnapshot(state);
   const selectedDoctor = snap.doctors.find((doctor) => doctor._id === doctorId);
   
-  
   return (
     <div>
       <BookingNav name={selectedDoctor.name} />
