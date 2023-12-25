@@ -26,8 +26,8 @@ CREATE TABLE slot(
 );
 ```
 ```
-CREATE TABLE slot_av(
-    sid INTEGER PRIMARY KEY,
+CREATE TABLE slotAV(
+    savid INTEGER PRIMARY KEY,
     did INTEGER,
     type enum(0,1),
     day VARCHAR(10),

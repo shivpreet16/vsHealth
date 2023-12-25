@@ -40,10 +40,20 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
       })
       .catch((e) => console.log(e));
   }, []);
+
   const handleViewProfile = (e) => {
     e.preventDefault();
     nav("/doctor", { state: id });
   };
+  
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    const data={
+      cid:selectedClinic,
+      did:id,
+      
+    }
+  }
 
   const handleInClinic = (e) => {
     e.preventDefault();
@@ -52,10 +62,14 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
   const handleAudio = (e) => {
     e.preventDefault();
     setIsClinic(false);
+    setSelectedTime(-1)
+    setSelectedClinic(-1)
   };
   const handleVideo = (e) => {
     e.preventDefault();
     setIsClinic(false);
+    setSelectedTime(-1)
+    setSelectedClinic(-1)
   };
 
   const getDayName = (date) => {
@@ -80,7 +94,7 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
       const body = {
         did: id,
         cid: cid,
-        day: getDayName(snap.date),
+        day: getDayName(snap.date)
       };
 
       axios
@@ -189,7 +203,7 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
                 color:"#64BC6E",
               }
             }}
-            variant="contained" onClick={(e) => {}}>
+            variant="contained" onClick={handleSubmit}>
               submit
             </Button>
           </div>

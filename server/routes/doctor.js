@@ -2,6 +2,7 @@ const express = require("express");
 const Doctors = require("../models/doctors.model");
 const Slots = require("../models/slots.model");
 const Clinics = require("../models/clinics.model");
+const SlotAVs = require("../models/slotAV.model")
 const router = express.Router();
 const { doctorData, slotData } = require("../utils/constants");
 const { Sequelize } = require("sequelize");
@@ -201,10 +202,63 @@ async function getCountByDay(did,cid) {
     throw error;
   }
 }
+async function getCountByDayAV(did,type) {
+  try {
+    const result = await SlotAVs.findAll({
+      attributes: [
+        [Sequelize.fn('COUNT', Sequelize.col('*')), 'slotCount'],
+        'day',
+      ],
+      where:{
+        did:did,
+        type:type
+      },
+      group: ['day'],
+    });
+
+    const formattedResult = {};
+
+    const daysOfWeek = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+
+    daysOfWeek.forEach((day) => {
+      formattedResult[day] = '-';
+    });
+
+    result.forEach((row) => {
+      const day = row.get('day');
+      const slotCount = row.get('slotCount');
+      formattedResult[day] = slotCount;
+    });
+
+    return formattedResult;
+  } catch (error) {
+    console.error('Error getting count by day:', error);
+    throw error;
+  }
+}
 router.route("/getNumberOfSlots").post((req,res)=>{
-  getCountByDay(req.body.did,req.body.cid).then(resp=>{
-    // console.log(resp)
-    res.send(resp)
-  }).catch(e=>res.send("Inernal Server Error at /getNumberOfSlots"))
+  if(req.body.appointmentType == 2){
+    getCountByDay(req.body.did,req.body.cid).then(resp=>{
+      // console.log(resp)
+      res.send(resp)
+    }).catch(e=>res.send("Inernal Server Error at /getNumberOfSlots"))
+  }  else{
+    //audio=0, video=1
+    getCountByDayAV(req.body.did,req.body.cid,req.body.appointmentType).then(resp=>{
+      console.log(resp)
+      res.send(resp)
+    }).catch(e=>res.send("Inernal Server Error at /getNumberOfSlots"))
+
+  }
 })
+
+
 module.exports = router;

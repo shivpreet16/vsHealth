@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -18,15 +18,22 @@ const GreenTextTab = styled(Tab)({
 
 export default function DateTabs({ setSlot, cid, did }) {
   const [value, setValue] = useState(0);
-  const [dayCount,setDayCount]=useState(null)
-  useEffect(()=>{
-    if(cid!=undefined)
-    axios.post("https://localhost:3000/doctor/getNumberOfSlots",{did,cid}).then((r)=>setDayCount(r.data)).catch((e) => console.log(e));
-  },[cid])
+  const [dayCount, setDayCount] = useState(null);
+  useEffect(() => {
+    if (cid != undefined)
+      axios
+        .post("https://localhost:3000/doctor/getNumberOfSlots", {
+          did,
+          cid,
+          appointmentType: 2,
+        })
+        .then((r) => setDayCount(r.data))
+        .catch((e) => console.log(e));
+  }, [cid]);
 
-  const handleChange=(e,newValue)=>{
-    setValue(newValue)
-  }
+  const handleChange = (e, newValue) => {
+    setValue(newValue);
+  };
   const handleClick = async (date) => {
     state.date = date;
 
@@ -120,7 +127,7 @@ export default function DateTabs({ setSlot, cid, did }) {
         {dates.map((date, index) => (
           <GreenTextTab
             key={index}
-            onClick={(e)=>handleClick(date)}
+            onClick={(e) => handleClick(date)}
             label={
               <div className="flex flex-col gap-2">
                 <span className="text-black font-bold">
@@ -134,7 +141,9 @@ export default function DateTabs({ setSlot, cid, did }) {
                 </span>
                 {/* <span className="text-xs">8 slots available</span> */}
                 <span className="text-xs">
-                  {dayCount ? `${dayCount[getDayName(date)]} slots available` : "-"}
+                  {dayCount
+                    ? `${dayCount[getDayName(date)]} slots available`
+                    : "-"}
                 </span>
               </div>
             }
