@@ -1,3 +1,25 @@
+const getRandomInt = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const doctorIDs=[
+  "658828cf8a341add00cdc36a",
+  "658828cf8a341add00cdc37c",
+  "658828cf8a341add00cdc382",
+  "658828cf8a341add00cdc388",
+  "658828cf8a341add00cdc38e",
+  "658828cf8a341add00cdc394",
+  "658828cf8a341add00cdc39a",
+  "658828cf8a341add00cdc3a0",
+  "658828cf8a341add00cdc3a6",
+  "658828cf8a341add00cdc3ac",
+  "658828cf8a341add00cdc3b2",
+  "658828cf8a341add00cdc3b8",
+  "658828cf8a341add00cdc3be",
+  "658828cf8a341add00cdc370",
+  "658828cf8a341add00cdc376"
+]
+
 const doctorData = [
   {
     name: "Dr. Taylor",
@@ -572,126 +594,126 @@ const clinicData = [
 const slotData=[
   {
     sid: 1,
-    did: '658828cf8a341add00cdc38e',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 9,
     day: 'Monday',
     time: '02:00 PM'
   },
   {
     sid: 2,
-    did: '658828cf8a341add00cdc3ac',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 9,
     day: 'Thursday',
     time: '11:00 AM'
   },
   {
     sid: 3,
-    did: '658828cf8a341add00cdc382',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 2,
     day: 'Wednesday',
     time: '03:00 PM'
   },
   {
     sid: 4,
-    did: '658828cf8a341add00cdc3a0',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 3,
     day: 'Thursday',
     time: '02:00 PM'
   },
   {
     sid: 5,
-    did: '658828cf8a341add00cdc382',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 10,
     day: 'Friday',
     time: '03:00 PM'
   },
   {
     sid: 6,
-    did: '658828cf8a341add00cdc3b2',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 7,
     day: 'Friday',
     time: '10:00 AM'
   },
   {
     sid: 7,
-    did: '658828cf8a341add00cdc37c',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 10,
     day: 'Wednesday',
     time: '10:00 AM'
   },
   {
     sid: 8,
-    did: '658828cf8a341add00cdc3b8',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 7,
     day: 'Tuesday',
     time: '11:00 AM'
   },
   {
     sid: 9,
-    did: '658828cf8a341add00cdc3b8',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 10,
     day: 'Thursday',
     time: '10:00 AM'
   },
   {
     sid: 10,
-    did: '658828cf8a341add00cdc38e',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 6,
     day: 'Wednesday',
     time: '09:00 AM'
   },
   {
     sid: 11,
-    did: '658828cf8a341add00cdc3b8',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 8,
     day: 'Friday',
     time: '10:00 AM'
   },
   {
     sid: 12,
-    did: '658828cf8a341add00cdc3a6',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 7,
     day: 'Monday',
     time: '11:00 AM'
   },
   {
     sid: 13,
-    did: '658828cf8a341add00cdc3ac',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 8,
     day: 'Wednesday',
     time: '11:00 AM'
   },
   {
     sid: 14,
-    did: '658828cf8a341add00cdc388',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 10,
     day: 'Wednesday',
     time: '02:00 PM'
   },
   {
     sid: 15,
-    did: '658828cf8a341add00cdc36a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 1,
     day: 'Thursday',
     time: '10:00 AM'
   },
   {
     sid: 16,
-    did: '658828cf8a341add00cdc3a6',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 8,
     day: 'Monday',
     time: '03:00 PM'
   },
   {
     sid: 17,
-    did: '658828cf8a341add00cdc382',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 4,
     day: 'Friday',
     time: '10:00 AM'
   },
   {
     sid: 18,
-    did: '658828cf8a341add00cdc3ac',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 1,
     day: 'Tuesday',
     time: '09:00 AM'
@@ -712,7 +734,7 @@ const slotData=[
   },
   {
     sid: 21,
-    did: '658828cf8a341add00cdc3ac',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 8,
     day: 'Wednesday',
     time: '10:00 AM'
@@ -726,62 +748,62 @@ const slotData=[
   },
   {
     sid: 23,
-    did: '658828cf8a341add00cdc370',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 1,
     day: 'Friday',
     time: '10:00 AM'
   },
   {
     sid: 24,
-    did: '658828cf8a341add00cdc394',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 2,
     day: 'Monday',
     time: '10:00 AM'
   },
   {
     sid: 25,
-    did: '658828cf8a341add00cdc39a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 9,
     day: 'Tuesday',
     time: '02:00 PM'
   },
   {
     sid: 26,
-    did: '658828cf8a341add00cdc3a0',cid: 1,
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],cid: 1,
     day: 'Wednesday',
     time: '09:00 AM'
   },
   {
     sid: 27,
-    did: '658828cf8a341add00cdc3a0',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 7,
     day: 'Friday',
     time: '03:00 PM'
   },
   {
     sid: 28,
-    did: '658828cf8a341add00cdc382',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 4,
     day: 'Thursday',
     time: '10:00 AM'
   },
   {
     sid: 29,
-    did: '658828cf8a341add00cdc376',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 4,
     day: 'Friday',
     time: '10:00 AM'
   },
   {
     sid: 30,
-    did: '658828cf8a341add00cdc3a6',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 5,
     day: 'Tuesday',
     time: '09:00 AM'
   },
   {
     sid: 31,
-    did: '658828cf8a341add00cdc39a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 4,
     day: 'Tuesday',
     time: '10:00 AM'
@@ -795,264 +817,288 @@ const slotData=[
   },
   {
     sid: 33,
-    did: '658828cf8a341add00cdc37c',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 3,
     day: 'Thursday',
     time: '11:00 AM'
   },
   {
     sid: 34,
-    did: '658828cf8a341add00cdc3a6',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 8,
     day: 'Monday',
     time: '11:00 AM'
   },
   {
     sid: 35,
-    did: '658828cf8a341add00cdc3be',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 5,
     day: 'Monday',
     time: '09:00 AM'
   },
   {
     sid: 36,
-    did: '658828cf8a341add00cdc39a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 4,
     day: 'Monday',
     time: '09:00 AM'
   },
   {
     sid: 37,
-    did: '658828cf8a341add00cdc3b2',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 6,
     day: 'Tuesday',
     time: '03:00 PM'
   },
   {
     sid: 38,
-    did: '658828cf8a341add00cdc3a0',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 4,
     day: 'Monday',
     time: '02:00 PM'
   },
   {
     sid: 39,
-    did: '658828cf8a341add00cdc38e',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 4,
     day: 'Tuesday',
     time: '09:00 AM'
   },
   {
     sid: 40,
-    did: '658828cf8a341add00cdc36a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 8,
     day: 'Monday',
     time: '10:00 AM'
   },
   {
     sid: 41,
-    did: '658828cf8a341add00cdc36a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 9,
     day: 'Wednesday',
     time: '10:00 AM'
   },
   {
     sid: 42,
-    did: '658828cf8a341add00cdc3ac',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 6,
     day: 'Friday',
     time: '03:00 PM'
   },
   {
     sid: 43,
-    did: '658828cf8a341add00cdc3ac',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 10,
     day: 'Thursday',
     time: '09:00 AM'
   },
   {
     sid: 44,
-    did: '658828cf8a341add00cdc39a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 9,
     day: 'Thursday',
     time: '03:00 PM'
   },
   {
     sid: 45,
-    did: '658828cf8a341add00cdc36a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 3,
     day: 'Friday',
     time: '09:00 AM'
   },
   {
     sid: 46,
-    did: '658828cf8a341add00cdc36a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 3,
     day: 'Friday',
     time: '09:15 AM'
   },
   {
     sid: 47,
-    did: '658828cf8a341add00cdc36a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 3,
     day: 'Friday',
     time: '10:00 AM'
   },
   {
     sid: 48,
-    did: '658828cf8a341add00cdc36a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     cid: 3,
     day: 'Friday',
     time: '12:00 PM'
   },
   {
     sid: 49,
-    did: '658828cf8a341add00cdc36a',
+    did: "658828cf8a341add00cdc36a",
     cid: 3,
     day: 'Friday',
     time: '11:00 AM'
+  },
+  {
+    sid: 50,
+    did: "658828cf8a341add00cdc36a",
+    cid: 3,
+    day: 'Friday',
+    time: '12:00 PM'
+  },
+  {
+    sid: 51,
+    did: "658828cf8a341add00cdc36a",
+    cid: 3,
+    day: 'Friday',
+    time: '11:10 AM'
+  },
+  {
+    sid: 52,
+    did: "658828cf8a341add00cdc36a",
+    cid: 3,
+    day: 'Friday',
+    time: '12:00 PM'
+  },
+  {
+    sid: 53,
+    did: "658828cf8a341add00cdc36a",
+    cid: 3,
+    day: 'Friday',
+    time: '1:00 PM'
   },
 ]
 
 const slotAvData=[
   {
-    did: '658828cf8a341add00cdc376',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 0,
     day: 'Wednesday',
     time: '10:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc370',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Friday',
     time: '02:00 PM'
   },
   {
-    did: '658828cf8a341add00cdc3ac',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 0,
     day: 'Wednesday',
     time: '03:00 PM'
   },
   {
-    did: '658828cf8a341add00cdc376',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Friday',
     time: '09:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc38e',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Tuesday',
     time: '09:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc394',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Thursday',
     time: '03:00 PM'
   },
   {
-    did: '658828cf8a341add00cdc38e',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Tuesday',
     time: '10:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc3a6',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Wednesday',
     time: '11:00 AM'
   },
-  { did: undefined, type: 1, day: 'Friday', time: '09:00 AM' },
   {
-    did: '658828cf8a341add00cdc37c',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Thursday',
     time: '03:00 PM'
   },
   {
-    did: '658828cf8a341add00cdc3a6',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Thursday',
     time: '10:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc3be',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 0,
     day: 'Wednesday',
     time: '10:00 AM'
   },
-  { did: undefined, type: 1, day: 'Wednesday', time: '09:00 AM' },
   {
-    did: '658828cf8a341add00cdc38e',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Wednesday',
     time: '09:00 AM'
   },
-  { did: undefined, type: 1, day: 'Wednesday', time: '02:00 PM' },
-  { did: undefined, type: 1, day: 'Monday', time: '10:00 AM' },
   {
-    did: '658828cf8a341add00cdc3a0',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Friday',
     time: '09:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc39a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Monday',
     time: '09:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc3be',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Friday',
     time: '11:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc37c',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Friday',
     time: '02:00 PM'
   },
   {
-    did: '658828cf8a341add00cdc3ac',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Tuesday',
     time: '11:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc3be',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 0,
     day: 'Monday',
     time: '02:00 PM'
   },
   {
-    did: '658828cf8a341add00cdc3a6',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 0,
     day: 'Friday',
     time: '11:00 AM'
   },
-  { did: undefined, type: 0, day: 'Monday', time: '11:00 AM' },
   {
-    did: '658828cf8a341add00cdc39a',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 1,
     day: 'Monday',
     time: '09:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc394',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 0,
     day: 'Wednesday',
     time: '10:00 AM'
   },
   {
-    did: '658828cf8a341add00cdc3be',
+    did: doctorIDs[getRandomInt(0, doctorIDs.length - 1)],
     type: 0,
     day: 'Wednesday',
     time: '11:00 AM'
   }
 ]
+
 
 module.exports = {
   doctorData,
