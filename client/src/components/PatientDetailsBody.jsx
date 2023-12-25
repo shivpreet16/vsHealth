@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DoctorHeader from "./DoctorHeader";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams,useNavigate } from "react-router-dom";
 import {
   Card,
   TextField,
@@ -20,6 +20,7 @@ import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import axios from "axios";
 
 const PatientDetailsBody = ({selectedDoctor}) => {
+    const nav=useNavigate()
   const location = useLocation();
   const state = location.state;
   const appointmentType = state.type;
@@ -56,6 +57,7 @@ const PatientDetailsBody = ({selectedDoctor}) => {
 
     axios.post("https://localhost:3000/user/book",body).then(r=>{
         alert(r.data)
+        nav("/dashboard")
     }).catch(e=>console.log(e))
   };
   return (

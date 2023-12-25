@@ -63,6 +63,7 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
 
       const data = {
         cid: selectedClinic,
+        docName:name,
         did: id,
         token:JSON.parse(getCookie('vsHealth')).token,
         type:appointmentType,

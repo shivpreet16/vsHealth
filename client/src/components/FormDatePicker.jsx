@@ -11,7 +11,7 @@ export default function FormDatePicker({ formData, handleDateChange }) {
         <DatePicker
           value={formData.dateOfBirth || null}
           onChange={handleDateChange}
-          label="Basic date picker"
+          label="DOB"
         />
       </DemoContainer>
     </LocalizationProvider>

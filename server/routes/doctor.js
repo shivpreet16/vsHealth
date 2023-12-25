@@ -8,14 +8,13 @@ const router = express.Router();
 const { doctorData, slotData, slotAvData } = require("../utils/constants");
 const { Sequelize } = require("sequelize");
 
-router.route("/dummy").get((req, res) => {
+router.route("/getDocId").get((req, res) => {
   async function getAllDoctors() {
     const doctors = await Doctors.find();
     return doctors;
   }
   getAllDoctors()
     .then((doctors) => {
-      //   console.log(doctors);
       let arr = [];
       doctors.map((d) => {
         arr.push(d._id);

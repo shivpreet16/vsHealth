@@ -129,22 +129,6 @@ async function getUserByEmail(email) {
   return user;
 }
 
-{
-  /*
-cid:"8"
-date:Mon Dec 25 2023 14:12:32 GMT+0530 (India Standard Time) {}
-did:"658828cf8a341add00cdc36a"
-dob:M2 {$L: 'en', $u: undefined, $d: Mon Dec 04 2023 00:00:00 GMT+0530 (India Standard Time), $y: 2023, $M: 11, …}
-fees:403
-fullName:"Shivpreet Padhi"
-gender:"male"
-slotId:40
-time:"10:00 AM"
-token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoaXZwcmVldDE2MDZAZ21haWwuY29tIiwiaWF0IjoxNzAzNDg2MzY4LCJleHAiOjE3MDM1NzI3Njh9.MJWhWfkdNORVKI1ZGcd3ziDgxuk__xNnKA6Pm7FPiQA"
-type:2
-*/
-}
-
 async function insertAppointment(body) {
   const appointment = await Appointments.create(body);
 
@@ -177,11 +161,43 @@ router.route("/book").post((req, res) => {
       insertAppointment(data)
         .then((r) => {
           console.log(r);
-          res.send("Appointment successful");
+          const email=decode.email
+          const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: process.env.EMAIL_ADDRESS,
+              pass: process.env.EMAIL_PASSWORD,
+            },
+          });
+
+          const mailOptions = {
+            from: process.env.EMAIL_ADDRESS,
+            to: email,
+            subject: "Appointment details - vsHealth",
+            text: `
+            Dear ${r.dataValues.patientName},
+            Your appointment id is ${r.dataValues.aid}.
+            Appointment details:
+            - ${body.docName}
+            - Type: ${body.type==0?"in-clinic":body.type==0?"Audio meeting":"Video meeting"}
+            - Time: ${body.time}
+            `,
+          };
+
+          transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+              console.error("Error sending email", err);
+              res.status(500).send("Internal server error");
+            } else {
+              console.log("Email sent:", info.response);
+              res.send("Appointment successful. Find details on your email. Thank you!");
+            }
+          });
+
         })
         .catch((e) => {
           console.log(e);
-          res.send("Internal server erroe");
+          res.send("Internal server erro");
         });
     })
     .catch((e) => {
