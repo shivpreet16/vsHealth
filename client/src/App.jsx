@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Login from './Pages/Login'
+import InputPatientDetails from './Pages/InputPatientDetails';
 import Dashboard from './Pages/Dashboard'
 import DoctorDetails from './Pages/DoctorDetails';
 import DoctorProfile from './Pages/DoctorProfile';
@@ -11,7 +12,6 @@ import axios from "axios"
 
 export default function App() {
   const snap = useSnapshot(state);
-  const doctors = [];
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingData, setIsLoadingData] = useState(true);
 
@@ -74,7 +74,8 @@ export default function App() {
           path="/dashboard/:doctorId"
           element={state.isAuthenticated ? <DoctorDetails /> : <Navigate to="/" replace />}
         />
-        <Route path="/doctor" element={state.isAuthenticated ? <DoctorProfile doctors={doctors} /> : <Navigate to="/" replace />}/>
+        <Route path="/doctor" element={state.isAuthenticated ? <DoctorProfile /> : <Navigate to="/" replace />}/>
+        <Route path="/appointment" element={state.isAuthenticated ? <InputPatientDetails /> : <Navigate to="/" replace />}/>
       </Routes>
     </div>
   );

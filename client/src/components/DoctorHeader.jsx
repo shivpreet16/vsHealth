@@ -5,7 +5,7 @@ import doctorFemaleImage from "../assets/doctor_Female.svg";
 import { Avatar, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const DoctorHeader = ({name, specialization, gender}) => {
+const DoctorHeader = ({id,name, specialization, gender}) => {
     const imagePath = gender === "Male" ? doctorMaleImage : doctorFemaleImage;
     const nav = new useNavigate();
 

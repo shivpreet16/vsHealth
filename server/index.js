@@ -8,6 +8,7 @@ const { mongoConnect, sqlConnect } = require("./utils/connect");
 const userRoute = require("./routes/user");
 const Users = require("./models/user.model");
 const Clinics = require("./models/clinics.model")
+const Appointments=require("./models/appointments.model")
 const Slots=require("./models/slots.model")
 const SlotAVs = require("./models/slotAV.model")
 const doctorRoute = require("./routes/doctor")
@@ -45,6 +46,7 @@ const syncTables = async()=>{
   await Clinics.sync()
   await Slots.sync()
   await SlotAVs.sync()
+  await Appointments.sync()
 }
 
 syncTables()

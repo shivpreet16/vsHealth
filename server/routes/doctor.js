@@ -151,9 +151,6 @@ async function getSlotTime({did,cid,day}){
   }
 }
 async function getSlotTimeAV({did,type,day}){
-  console.log(did)
-  console.log(type)
-  console.log(day)
   try{
     const slotTime=await SlotAVs.findAll({
       attributes:['savid','time'],

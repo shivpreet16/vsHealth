@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { sqlConnect } = require("../utils/connect");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 
 const connection = sqlConnect();
 const Users = connection.define(
@@ -42,16 +42,16 @@ Users.checkOTP = async function (email, otp) {
     const curr = new Date();
     if (curr - user.timestamp > 2 * 60 * 1000) {
       await user.update({ valid: false });
-      return "OTP time limit exceeded"
-    } 
-    if(user.valid!=true){
-      return "Request a new OTP"
+      return "OTP time limit exceeded";
     }
-    if(!bcrypt.compareSync(otp, user.currOTP)){
-      return "OTP incorrect"
+    if (user.valid != true) {
+      return "Request a new OTP";
+    }
+    if (!bcrypt.compareSync(otp, user.currOTP)) {
+      return "OTP incorrect";
     }
     await user.update({ valid: false });
-    return "success"
+    return "success";
   } catch (error) {
     console.error("Error in checkOTP:", error);
     throw error;
@@ -61,9 +61,9 @@ Users.checkOTP = async function (email, otp) {
 Users.updateOrCreateByEmail = async function (email, otp) {
   try {
     let user = await this.findOne({ where: { email } });
-    const rounds=parseInt(process.env.BCRYPT_SALT_ROUNDS) || 9
-    const hashedOTP=bcrypt.hashSync(otp,rounds)
-    
+    const rounds = parseInt(process.env.BCRYPT_SALT_ROUNDS) || 9;
+    const hashedOTP = bcrypt.hashSync(otp, rounds);
+
     if (!user) {
       user = await this.create({
         email,
@@ -79,7 +79,11 @@ Users.updateOrCreateByEmail = async function (email, otp) {
       return { user, created: false, isValidRequest: 0 };
     }
 
-    await user.update({ currOTP: hashedOTP, timestamp: new Date(), valid: true });
+    await user.update({
+      currOTP: hashedOTP,
+      timestamp: new Date(),
+      valid: true,
+    });
 
     return { user, created: false, isValidRequest: 1 };
   } catch (error) {

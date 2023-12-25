@@ -29,6 +29,7 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
   const [clinics, setClinics] = useState([]);
   const [slot, setSlot] = useState([]);
   const [selectedTime, setSelectedTime] = useState(-1);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(-1);
   const [selectedClinic, setSelectedClinic] = useState(-1);
   const [dayCount, setDayCount] = useState(null);
 
@@ -56,14 +57,23 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {
-      cid: selectedClinic,
-      did: id,
-      token:JSON.parse(getCookie('vsHealth')).token,
-      type:appointmentType,
-      slotId:selectedTime,
-      fees:fees
-    };
+    if(selectedClinic===null || selectedTime===-1){
+      alert("Please input clinic and time details")
+    } else{
+
+      const data = {
+        cid: selectedClinic,
+        did: id,
+        token:JSON.parse(getCookie('vsHealth')).token,
+        type:appointmentType,
+        slotId:selectedTime,
+        fees:fees,
+        time:selectedTimeSlot,
+        date:snap.date
+      };
+      console.log(data)
+      nav('/appointment',{state:data})
+    }
 
   };
 
@@ -248,6 +258,7 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
                 value={i.sid||i.savid}
                 onClick={(e) => {
                   setSelectedTime(e.target.value);
+                  setSelectedTimeSlot(i.time)
                   console.log(e.target.value);
                 }}
                 className={`border-2 rounded-md grid justify-center items-center hover:bg-slate-200 duration-100 cursor-pointer ${
