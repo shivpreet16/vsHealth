@@ -16,7 +16,7 @@ const Login = () => {
   const [OTPState, setOTPState] = useState(false);
   const [email, setEmail] = useState("");
   const [response, setResponse] = useState("");
-  const nav = new useNavigate();
+  const nav = useNavigate();
 
   const handleOtp = (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ const Login = () => {
     const body = { email: email };
 
     axios
-      .post("https://localhost:3000/user/generateOTP", body)
+      .post("http://localhost:3000/user/generateOTP", body)
       .then((res) => {
         console.log(res.data);
         setResponse("*" + res.data);
@@ -47,7 +47,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://localhost:3000/user/checkOTP", {
+      .post("http://localhost:3000/user/checkOTP", {
         email: email,
         otp: OTP,
       })
@@ -57,7 +57,6 @@ const Login = () => {
           alert(res.data.message);
         } else {
           setCookie('vsHealth',JSON.stringify(res.data),1)
-          //set context true
           nav("/dashboard", { state: email });
           // alert(res.data.token);
         }

@@ -28,7 +28,7 @@ export default function DateTabs({
   useEffect(() => {
     if (cid != undefined)
       axios
-        .post("https://localhost:3000/doctor/getNumberOfSlots", {
+        .post("http://localhost:3000/doctor/getNumberOfSlots", {
           did,
           cid,
           type: 2,
@@ -53,7 +53,7 @@ export default function DateTabs({
       };
 
       axios
-        .post("https://localhost:3000/doctor/getTimeSlots", body)
+        .post("http://localhost:3000/doctor/getTimeSlots", body)
         .then((res) => {
           console.log(res.data)
           setSlot(res.data);
@@ -69,7 +69,7 @@ export default function DateTabs({
       };
 
       axios
-        .post("https://localhost:3000/doctor/getTimeSlots", body)
+        .post("http://localhost:3000/doctor/getTimeSlots", body)
         .then((r) => {
           setSlot(r.data);
         })
@@ -84,7 +84,7 @@ export default function DateTabs({
       };
 
       axios
-        .post("https://localhost:3000/doctor/getTimeSlots", body)
+        .post("http://localhost:3000/doctor/getTimeSlots", body)
         .then((r) => {
           setSlot(r.data);
         })

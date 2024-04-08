@@ -1,4 +1,4 @@
-const https = require("https");
+// const https = require("https");
 const fs = require("fs");
 const express = require("express");
 const dotenv = require("dotenv");
@@ -23,18 +23,18 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const options = {
-  key: fs.readFileSync("vshealth-privateKey.key"),
-  cert: fs.readFileSync("vshealth.crt"),
-};
+// const options = {
+//   key: fs.readFileSync("vshealth-privateKey.key"),
+//   cert: fs.readFileSync("vshealth.crt"),
+// };
 
 app.get("/", (req, res) => {
   res.send("Hello from server");
 });
 
-const server = https.createServer(options, app);
+// const server = https.createServer(options, app);
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log("Server listening at port: " + PORT);
 });
 

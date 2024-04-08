@@ -22,13 +22,15 @@ export default function App() {
   useEffect(() => {
     const checkAuthentication = async () => {
       if (getCookie('vsHealth') === undefined) {
+        console.log("state", state.isAuthenticated)
         state.isAuthenticated = false;
+        setIsLoading(false)
       } else {
         const cookie = JSON.parse(getCookie('vsHealth'));
         const body = { cookie: cookie };
 
         try {
-          const response = await axios.post("https://localhost:3000/user/authenticate", body);
+          const response = await axios.post("http://localhost:3000/user/authenticate", body);
           if (response.data !== "verified") {
             state.isAuthenticated = false;
           } else {
@@ -49,14 +51,17 @@ export default function App() {
   
   useEffect(() => {
     axios
-    .get("https://localhost:3000/doctor/getDoctors")
+    .get("http://localhost:3000/doctor/getDoctors")
     .then((response) => {
       state.doctors = response.data;
+      // console.log(response.data)
     })
     .catch((err) => {
       console.log(err);
     }).finally(()=>{
       setIsLoadingData(false);
+      // console.log(isLoading)
+      // console.log(isLoadingData)
       
       })
   }, []);

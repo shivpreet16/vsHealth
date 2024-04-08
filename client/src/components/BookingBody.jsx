@@ -43,7 +43,7 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
   useEffect(() => {
     if (!snap.date) state.date = new Date();
     axios
-      .post("https://localhost:3000/doctor/getClinics", { did: id })
+      .post("http://localhost:3000/doctor/getClinics", { did: id })
       .then((response) => {
         setClinics(response.data);
       })
@@ -102,13 +102,13 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
     }
     
 
-    axios.post("https://localhost:3000/doctor/getTimeSlots",body).then(r=>{
+    axios.post("http://localhost:3000/doctor/getTimeSlots",body).then(r=>{
       console.log(r.data)
       setSlot(r.data)
     }).catch(e=>console.log(e))
 
     axios
-        .post("https://localhost:3000/doctor/getNumberOfSlots", {
+        .post("http://localhost:3000/doctor/getNumberOfSlots", {
           did:id,
           type: 0,
         })
@@ -128,12 +128,12 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
       day:getDayName(snap.date)
     }
 
-    axios.post("https://localhost:3000/doctor/getTimeSlots",body).then(r=>{
+    axios.post("http://localhost:3000/doctor/getTimeSlots",body).then(r=>{
       setSlot(r.data)
     }).catch(e=>console.log(e))
 
     axios
-        .post("https://localhost:3000/doctor/getNumberOfSlots", {
+        .post("http://localhost:3000/doctor/getNumberOfSlots", {
           did:id,
           type: 1,
         })
@@ -170,7 +170,7 @@ const BookingBody = ({ id, name, specialization, gender, fees }) => {
       console.log(body)
 
       axios
-        .post("https://localhost:3000/doctor/getTimeSlots", body)
+        .post("http://localhost:3000/doctor/getTimeSlots", body)
         .then((res) => {
           console.log(res.data)
           setSlot(res.data);

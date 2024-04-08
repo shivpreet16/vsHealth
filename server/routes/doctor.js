@@ -37,6 +37,7 @@ router.route("/getDoctors").get((req, res) => {
 
   getAllDoctors()
     .then((doctors) => {
+      console.log(doctors)
       res.send(doctors);
     })
     .catch((err) => {

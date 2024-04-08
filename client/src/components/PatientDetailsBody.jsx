@@ -55,7 +55,7 @@ const PatientDetailsBody = ({selectedDoctor}) => {
       ...state,
     };
 
-    axios.post("https://localhost:3000/user/book",body).then(r=>{
+    axios.post("http://localhost:3000/user/book",body).then(r=>{
         alert(r.data)
         nav("/dashboard")
     }).catch(e=>console.log(e))
