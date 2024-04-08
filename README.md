@@ -1,4 +1,4 @@
-# VSCodeHelp Internship Task
+# Doctor Appointment Booking Application
 #### By Shivpreet Padhi
 
 This repository has the code for the frontend and backend internship assignment by VSCodeHelp. It contains:
